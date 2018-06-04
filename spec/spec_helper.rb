@@ -13,10 +13,19 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'webmock/rspec'
+require_relative 'support/mock_server'
+
+WebMock.disable_net_connect!(allow_localhost: true)
+STOREDSAFE_SERVER = "storedsafe.example.com".freeze
+
 RSpec.configure do |config|
-  # rspec-expectations config goes here. You can use an alternate
-  # assertion/expectation library such as wrong or the stdlib/minitest
-  # assertions if you prefer.
+
+  config.before(:each) do
+    base_uri = "https://#{STOREDSAFE_SERVER}"
+    stub_request(:any, /#{Regexp.quote(base_uri)}/).to_rack(MockServer)
+  end
+
   config.expect_with :rspec do |expectations|
     # This option will default to `true` in RSpec 4. It makes the `description`
     # and `failure_message` of custom matchers include text for helper methods
