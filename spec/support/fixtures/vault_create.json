@@ -1,0 +1,25 @@
+{
+    "GROUP": {
+        "179": {
+            "id": "179",
+            "groupname": "Firewalls in ZA",
+            "policy": "7",
+            "description": "Login information and license keys",
+            "status": "4",
+            "statustext": "Admin"
+        }
+    },
+    "DATA": {
+        "token": "StoredSafe-Token",
+        "groupname": "Firewalls in ZA",
+        "policy": "7",
+        "description": "Login information and license keys"
+    },
+    "PARAMS": [],
+    "CALLINFO": {
+        "token": "StoredSafe-Token",
+        "message": "Vault created",
+        "handler": "GroupHandler",
+        "status": "SUCCESS"
+    }
+}

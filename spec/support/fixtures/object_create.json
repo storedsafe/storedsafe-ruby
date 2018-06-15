@@ -1,0 +1,22 @@
+{
+    "DATA": {
+        "token": "StoredSafe-Token",
+        "templateid": "1",
+        "parentid": "0",
+        "groupid": "179",
+        "objectname": "firewall2.za.example.com",
+        "host": "firewall2.za.example.com",
+        "username": "root",
+        "info": "The second pfSense fw protecting the ZA branch.",
+        "password": "~[vN8x9W6~7P367vm53Y",
+        "cryptedinfo": "iLO password is #q:vP74A+VRmW5Ueu12O"
+    },
+    "PARAMS": [],
+    "CALLINFO": {
+        "token": "StoredSafe-Token",
+        "objectid": 491,
+        "message": "Object successfully saved",
+        "handler": "ObjectHandler",
+        "status": "SUCCESS"
+    }
+}

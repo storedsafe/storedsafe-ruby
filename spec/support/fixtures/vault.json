@@ -1,0 +1,37 @@
+{
+    "GROUP": {
+        "4": {
+            "id": "4",
+            "groupname": "Vault number uno",
+            "policy": "7",
+            "description": "Descriptive text about the vault",
+            "status": "1",
+            "statustext": "Read"
+        },
+        "1": {
+            "id": "1",
+            "groupname": "Vault number due",
+            "policy": "13",
+            "description": "Descriptive text about the vault",
+            "status": "2",
+            "statustext": "Write"
+        },
+        "19": {
+            "id": "19",
+            "groupname": "Vault number tre",
+            "policy": "2",
+            "description": "Descriptive text about the vault",
+            "status": "4",
+            "statustext": "Admin"
+        }
+    },
+    "DATA": {
+        "token": "StoredSafe-Token"
+    },
+    "PARAMS": [],
+    "CALLINFO": {
+        "token": "StoredSafe-Token",
+        "handler": "GroupHandler",
+        "status": "SUCCESS"
+    }
+}

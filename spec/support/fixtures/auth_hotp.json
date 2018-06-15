@@ -1,0 +1,20 @@
+{
+    "DATA": {
+        "username": "foo@example.com",
+        "keys": "ThisIsAPrettyLousyPassPhraseMy-API-KeyOhMyCouldThisReallyBeAnOTP"
+    },
+    "PARAMS": [],
+    "CALLINFO": {
+        "token": "StoredSafe-Token",
+        "fingerprint": "<PGP fingerprint>",
+        "userid": "42",
+        "password": "ThisIsAPrettyLousyPassPhrase",
+        "userstatus": "396",
+        "username": "sven",
+        "fullname": "Sven Test",
+        "timeout": 3600000,
+        "filesupport": 3,
+        "handler": "AuthHandler",
+        "status": "SUCCESS"
+    }
+}

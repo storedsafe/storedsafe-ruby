@@ -1,0 +1,483 @@
+{
+    "TEMPLATE": {
+        "2": {
+            "INFO": {
+                "id": "2",
+                "name": "Folder",
+                "ico": "folder",
+                "active": true,
+                "wb": true
+            },
+            "STRUCTURE": {
+                "name": {
+                    "translation": "Folder name",
+                    "type": "text",
+                    "encrypted": false,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": false,
+                    "cc": false,
+                    "nc": false
+                },
+                "info": {
+                    "translation": "Description",
+                    "type": "textarea",
+                    "encrypted": false,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": true,
+                    "cc": false,
+                    "nc": false
+                }
+            }
+        },
+        "0": {
+            "INFO": {
+                "id": "0",
+                "name": "Person",
+                "ico": "person",
+                "active": true,
+                "wb": true
+            },
+            "STRUCTURE": {
+                "pnr": {
+                    "translation": "Personnummer",
+                    "type": "text",
+                    "encrypted": false,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": false,
+                    "cc": false,
+                    "nc": false
+                },
+                "namn": {
+                    "translation": "Namn",
+                    "type": "text",
+                    "encrypted": false,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": false,
+                    "cc": false,
+                    "nc": false
+                },
+                "adress": {
+                    "translation": "Adress",
+                    "type": "textarea",
+                    "encrypted": false,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": false,
+                    "cc": false,
+                    "nc": false
+                },
+                "cryptedinfo": {
+                    "translation": "Sensitive info",
+                    "type": "textarea",
+                    "encrypted": true,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": true,
+                    "cc": false,
+                    "nc": true
+                }
+            }
+        },
+        "4": {
+            "INFO": {
+                "id": "4",
+                "name": "Login",
+                "ico": "server",
+                "active": true,
+                "wb": true
+            },
+            "STRUCTURE": {
+                "host": {
+                    "translation": "Host / IP",
+                    "type": "text",
+                    "encrypted": false,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": false,
+                    "cc": false,
+                    "nc": false
+                },
+                "username": {
+                    "translation": "Username",
+                    "type": "text",
+                    "encrypted": false,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": false,
+                    "cc": false,
+                    "nc": false
+                },
+                "password": {
+                    "translation": "Password",
+                    "type": "text-passwdgen",
+                    "encrypted": true,
+                    "show": true,
+                    "policy": true,
+                    "alarm": true,
+                    "opt": false,
+                    "cc": true,
+                    "nc": true
+                }
+            }
+        },
+        "10": {
+            "INFO": {
+                "id": "10",
+                "name": "Short login",
+                "ico": "server",
+                "active": true,
+                "ed": true,
+                "wb": false,
+                "jp": true
+            },
+            "STRUCTURE": {
+                "username": {
+                    "translation": "Username",
+                    "type": "text",
+                    "encrypted": false,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": false,
+                    "cc": false,
+                    "nc": false
+                },
+                "password": {
+                    "translation": "Password",
+                    "type": "text-passwdgen",
+                    "encrypted": true,
+                    "show": true,
+                    "policy": true,
+                    "alarm": true,
+                    "opt": false,
+                    "cc": true,
+                    "nc": true
+                }
+            }
+        },
+        "1": {
+            "INFO": {
+                "id": "1",
+                "name": "Server",
+                "ico": "server",
+                "active": true,
+                "wb": true
+            },
+            "STRUCTURE": {
+                "host": {
+                    "translation": "Host / IP",
+                    "type": "text",
+                    "encrypted": false,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": false,
+                    "cc": false,
+                    "nc": false
+                },
+                "username": {
+                    "translation": "Username",
+                    "type": "text",
+                    "encrypted": false,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": false,
+                    "cc": false,
+                    "nc": false
+                },
+                "password": {
+                    "translation": "Password",
+                    "type": "text-passwdgen",
+                    "encrypted": true,
+                    "show": true,
+                    "policy": true,
+                    "alarm": true,
+                    "opt": false,
+                    "cc": true,
+                    "nc": true
+                },
+                "info": {
+                    "translation": "Information",
+                    "type": "textarea",
+                    "encrypted": false,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": true,
+                    "cc": false,
+                    "nc": false
+                },
+                "cryptedinfo": {
+                    "translation": "Sensitive info",
+                    "type": "textarea",
+                    "encrypted": true,
+                    "show": false,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": true,
+                    "cc": false,
+                    "nc": false
+                }
+            }
+        },
+        "3": {
+            "INFO": {
+                "id": "3",
+                "name": "File",
+                "ico": "file",
+                "active": true,
+                "wb": true,
+                "jp": true
+            },
+            "STRUCTURE": {
+                "file1": {
+                    "translation": "File",
+                    "type": "file",
+                    "encrypted": false,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": false,
+                    "cc": false,
+                    "nc": false
+                },
+                "description": {
+                    "translation": "Description",
+                    "type": "text",
+                    "encrypted": false,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": false,
+                    "cc": false,
+                    "nc": false
+                }
+            }
+        },
+        "5": {
+            "INFO": {
+                "id": "5",
+                "name": "Quicknote",
+                "ico": "person",
+                "active": true,
+                "wb": true
+            },
+            "STRUCTURE": {
+                "name": {
+                    "translation": "Namn",
+                    "type": "text",
+                    "encrypted": false,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": false,
+                    "cc": false,
+                    "nc": false
+                },
+                "progress": {
+                    "translation": "Slutförd",
+                    "type": "progress",
+                    "encrypted": false,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": false,
+                    "cc": false,
+                    "nc": false
+                }
+            }
+        },
+        "6": {
+            "INFO": {
+                "id": "6",
+                "name": "PKI",
+                "ico": "crt",
+                "active": true,
+                "wb": true
+            },
+            "STRUCTURE": {
+                "cn": {
+                    "translation": "Common Name (CN)",
+                    "type": "text",
+                    "encrypted": false,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": false,
+                    "cc": false,
+                    "nc": false
+                },
+                "validfrom": {
+                    "translation": "Valid from",
+                    "type": "text",
+                    "encrypted": false,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": false,
+                    "cc": false,
+                    "nc": false
+                },
+                "validto": {
+                    "translation": "Valid to",
+                    "type": "text",
+                    "encrypted": false,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": false,
+                    "cc": false,
+                    "nc": false
+                },
+                "alertafter": {
+                    "translation": "Alert from",
+                    "type": "text",
+                    "encrypted": false,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": false,
+                    "cc": false,
+                    "nc": false
+                },
+                "passphrase": {
+                    "translation": "Passphrase",
+                    "type": "text-passwdgen",
+                    "encrypted": true,
+                    "show": true,
+                    "policy": true,
+                    "alarm": true,
+                    "opt": false,
+                    "cc": true,
+                    "nc": true
+                },
+                "info": {
+                    "translation": "Information",
+                    "type": "textarea",
+                    "encrypted": false,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": true,
+                    "cc": false,
+                    "nc": false
+                }
+            }
+        },
+        "7": {
+            "INFO": {
+                "id": "7",
+                "name": "Certificate",
+                "ico": "crt",
+                "active": true,
+                "wb": true,
+                "jp": true
+            },
+            "STRUCTURE": {
+                "certificate": {
+                    "translation": "Certificate",
+                    "type": "file",
+                    "encrypted": false,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": false,
+                    "cc": false,
+                    "nc": false
+                }
+            }
+        },
+        "8": {
+            "INFO": {
+                "id": "8",
+                "name": "Note",
+                "ico": "note",
+                "active": true,
+                "ed": true,
+                "wb": false,
+                "jp": true
+            },
+            "STRUCTURE": {
+                "name": {
+                    "translation": "Name",
+                    "type": "text",
+                    "encrypted": false,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": false,
+                    "cc": false,
+                    "nc": false
+                },
+                "note": {
+                    "translation": "Note",
+                    "type": "textarea",
+                    "encrypted": true,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": true,
+                    "cc": false,
+                    "nc": true
+                }
+            }
+        },
+        "9": {
+            "INFO": {
+                "id": "9",
+                "name": "PIN code",
+                "ico": "pin",
+                "active": true,
+                "ed": true,
+                "wb": false,
+                "jp": true
+            },
+            "STRUCTURE": {
+                "name": {
+                    "translation": "Name",
+                    "type": "text",
+                    "encrypted": false,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": false,
+                    "cc": false,
+                    "nc": false
+                },
+                "pincode": {
+                    "translation": "PIN Code",
+                    "type": "text-passwdgen",
+                    "encrypted": true,
+                    "show": true,
+                    "policy": true,
+                    "alarm": true,
+                    "opt": false,
+                    "cc": true,
+                    "nc": true
+                }
+            }
+        }
+    },
+    "DATA": {
+        "token": "StoredSafe-Token"
+    },
+    "PARAMS": [],
+    "CALLINFO": {
+        "token": "StoredSafe-Token",
+        "handler": "TemplateHandler",
+        "status": "SUCCESS"
+    }
+}

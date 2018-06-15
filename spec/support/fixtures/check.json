@@ -1,0 +1,12 @@
+{
+    "DATA": {
+        "token": "StoredSafe-Token"
+    },
+    "PARAMS": [],
+    "CALLINFO": {
+        "token": "StoredSafe-Token",
+        "": "SESSION_ALIVE",
+        "handler": "AuthHandler",
+        "status": "SUCCESS"
+    }
+}

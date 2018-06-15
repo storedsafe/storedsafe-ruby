@@ -1,0 +1,109 @@
+{
+    "GROUP": {
+        "4": {
+            "id": "4",
+            "groupname": "Vault number uno",
+            "policy": "7",
+            "description": "Descriptive text about the vault",
+            "status": "1",
+            "statustext": "Read"
+        }
+    },
+    "OBJECT": {
+        "6": {
+            "id": "6",
+            "parentid": "0",
+            "templateid": "1",
+            "groupid": "4",
+            "status": "128",
+            "objectname": "test-server2.example.com",
+            "filename": "",
+            "children": "0",
+            "notes": false,
+            "tags": "www",
+            "alarmed": false,
+            "public": {
+                "host": "test-server2.example.com",
+                "username": "Administrator",
+                "info": "Last changed from IP 1.2.3.4"
+            }
+        }
+    },
+    "TEMPLATESINFO": {
+        "1": {
+            "INFO": {
+                "id": "1",
+                "name": "Server",
+                "ico": "server",
+                "active": true,
+                "wb": true
+            },
+            "STRUCTURE": {
+                "host": {
+                    "translation": "Host / IP",
+                    "type": "text",
+                    "encrypted": false,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": false,
+                    "cc": false,
+                    "nc": false
+                },
+                "username": {
+                    "translation": "Username",
+                    "type": "text",
+                    "encrypted": false,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": false,
+                    "cc": false,
+                    "nc": false
+                },
+                "password": {
+                    "translation": "Password",
+                    "type": "text-passwdgen",
+                    "encrypted": true,
+                    "show": true,
+                    "policy": true,
+                    "alarm": true,
+                    "opt": false,
+                    "cc": true,
+                    "nc": true
+                },
+                "info": {
+                    "translation": "Information",
+                    "type": "textarea",
+                    "encrypted": false,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": true,
+                    "cc": false,
+                    "nc": false
+                },
+                "cryptedinfo": {
+                    "translation": "Sensitive info",
+                    "type": "textarea",
+                    "encrypted": true,
+                    "show": false,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": true,
+                    "cc": false,
+                    "nc": false
+                }
+            }
+        }
+    },
+    "DATA": {
+        "token": "StoredSafe-Token"
+    },
+    "PARAMS": [],
+    "CALLINFO": {
+        "token": "StoredSafe-Token",
+        "handler": "GroupHandler",
+        "status": "SUCCESS"
+    }
+}

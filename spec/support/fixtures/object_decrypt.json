@@ -1,0 +1,69 @@
+{
+    "OBJECT": {
+        "489": {
+            "id": "489",
+            "parentid": "0",
+            "templateid": "8",
+            "groupid": "179",
+            "status": "128",
+            "objectname": "Disaster Recovery Instructions",
+            "filename": "",
+            "children": "0",
+            "notes": false,
+            "tags": "",
+            "alarmed": false,
+            "public": {
+                "name": "Disaster Recovery Instructions"
+            },
+            "crypted": {
+                "note": "Are located in the right drawer, just inside the DC"
+            }
+        }
+    },
+    "TEMPLATESINFO": {
+        "8": {
+            "INFO": {
+                "id": "8",
+                "name": "Note",
+                "ico": "note",
+                "active": true,
+                "ed": true,
+                "wb": false,
+                "jp": true
+            },
+            "STRUCTURE": {
+                "name": {
+                    "translation": "Name",
+                    "type": "text",
+                    "encrypted": false,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": false,
+                    "cc": false,
+                    "nc": false
+                },
+                "note": {
+                    "translation": "Note",
+                    "type": "textarea",
+                    "encrypted": true,
+                    "show": true,
+                    "policy": false,
+                    "alarm": false,
+                    "opt": true,
+                    "cc": false,
+                    "nc": true
+                }
+            }
+        }
+    },
+    "DATA": {
+        "token": "StoredSafe-Token"
+    },
+    "PARAMS": [],
+    "CALLINFO": {
+        "token": "StoredSafe-Token",
+        "handler": "ObjectHandler",
+        "status": "SUCCESS"
+    }
+}

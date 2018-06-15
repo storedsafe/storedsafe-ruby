@@ -1,0 +1,24 @@
+{
+    "GROUP": {
+        "178": {
+            "id": "178",
+            "groupname": "Firewalls in South Africa (ZA)",
+            "policy": "0",
+            "description": "Login information and license keys.",
+            "status": "4",
+            "statustext": "Admin"
+        }
+    },
+    "DATA": {
+        "token": "StoredSafe-Token",
+        "groupname": "Firewalls in South Africa (ZA)",
+        "description": "Login information and license keys."
+    },
+    "PARAMS": [],
+    "CALLINFO": {
+        "token": "StoredSafe-Token",
+        "message": "Vault updated",
+        "handler": "GroupHandler",
+        "status": "SUCCESS"
+    }
+}
