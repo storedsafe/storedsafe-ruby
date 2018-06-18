@@ -1,0 +1,14 @@
+{
+    "ERRORS": [
+        "Placeholder error for testing purposes."
+    ],
+    "DATA": {
+        "data": "Placeholder data for testing purposes."
+    },
+    "PARAMS": [],
+    "CALLINFO": {
+        "token": "StoredSafe-Token",
+        "handler": "<Handler>",
+        "status": "FAIL"
+    }
+}
