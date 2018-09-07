@@ -1,6 +1,7 @@
 module Storedsafe
   ##
   # Provides default values for Configurable parameters
+  ##
   module Defaults
     class << self
       def server

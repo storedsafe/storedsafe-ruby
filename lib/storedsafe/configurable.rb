@@ -1,6 +1,7 @@
 module Storedsafe
   ##
-  # Configure stuff
+  # Set up fields needed for configuration of Storedsafe connection.
+  ##
   module Configurable
     def self.keys # rubocop:disable Metrics/MethodLength
       @keys = %i[
