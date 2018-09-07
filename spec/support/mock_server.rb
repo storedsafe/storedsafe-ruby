@@ -1,6 +1,6 @@
 require 'sinatra/base'
 
-class MockServer < Sinatra::Base
+class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
   USERNAME = 'foo@example.com'.freeze
   PASSPHRASE = 'ThisIsAPrettyLousyPassPhrase'.freeze
   OTP = '123456'.freeze
@@ -29,30 +29,39 @@ class MockServer < Sinatra::Base
   post '/api/1.0/auth' do
     # HOTP auth
     if params.key?('username') && params.key?('keys')
-      if params['username'] == USERNAME &&
-         params['keys'] == KEYS
-        status 200
-        response_from_file('auth_hotp.json')
-      else
-        status 403
-        error_response
-      end
+      auth_hotp(params)
+
     # TOTP Auth
     elsif params['username'] &&
           params['passphrase'] &&
           params['otp'] &&
           params['apikey']
-      if params['username'] == USERNAME &&
-         params['passphrase'] == PASSPHRASE &&
-         params['otp'] == OTP &&
-         params['apikey'] == APIKEY
-        status 200
-        response_from_file('auth_totp.json')
-      else
-        status 403
-        error_response
-      end
+      auth_totp(params)
     # Missing parameters
+    else
+      status 403
+      error_response
+    end
+  end
+
+  def auth_hotp(params)
+    if params['username'] == USERNAME &&
+       params['keys'] == KEYS
+      status 200
+      response_from_file('auth_hotp.json')
+    else
+      status 403
+      error_response
+    end
+  end
+
+  def auth_totp(params)
+    if params['username'] == USERNAME &&
+       params['passphrase'] == PASSPHRASE &&
+       params['otp'] == OTP &&
+       params['apikey'] == APIKEY
+      status 200
+      response_from_file('auth_totp.json')
     else
       status 403
       error_response
@@ -242,7 +251,7 @@ class MockServer < Sinatra::Base
 
   helpers do
     # Verify that token exists and that it is valid.
-    # TODO: Reconisder method name
+    # TODO: Reconsider method name
     def token_valid?(params)
       token = params['token']
       if token
