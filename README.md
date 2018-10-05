@@ -13,3 +13,6 @@ This is a ruby wrapper for the Storedsafe REST-like API.
 - [ ] Collect configuration options for rspec in support file
 - [ ] Make configuration attributes related tests based on
       support file so that rubocop passes on specs.
+
+## Questions
+- [ ] Are all fields from the rc-file needed?

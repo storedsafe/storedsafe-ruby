@@ -3,6 +3,7 @@ module Storedsafe
   # Provides default values for Configurable parameters
   ##
   module Defaults
+    require_relative 'defaults/rc'
     class << self
       def server
         ENV['STOREDSAFE_SERVER']
