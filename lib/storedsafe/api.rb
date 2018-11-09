@@ -8,12 +8,8 @@ module Storedsafe
   class API
     include Configurable
     def initialize
-      Configurable.keys.each do |key|
-        value = Defaults.public_send(key)
-        instance_variable_set(:"@#{key}", value)
-      end
-
       yield self
+      Defaults.allocate(self)
     end
   end
 end

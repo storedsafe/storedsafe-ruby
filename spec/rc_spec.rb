@@ -1,6 +1,6 @@
 require 'storedsafe/defaults'
 
-describe Defaults::Rc do
+describe Storedsafe::Defaults::Rc do
   it 'reads settings from rc file' do
     token = 'A1B2C3'
     username = 'johndoe'
@@ -16,7 +16,7 @@ describe Defaults::Rc do
 
     rc_file.close
 
-    rc = Defaults::Rc.new(rc_file_name)
+    rc = Storedsafe::Defaults::Rc.new(rc_file_name)
     expect(rc.token).to eq(token)
     expect(rc.username).to eq(username)
     expect(rc.api_key).to eq(apikey)
