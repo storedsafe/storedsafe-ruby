@@ -13,12 +13,12 @@ module Storedsafe
       def allocate(configurable)
         if configurable.use_env ||
             (configurable.use_env.nil? && USE_ENV)
-          configurable.token ||= self.token
-          configurable.server ||= self.server
-          configurable.ca_bundle ||= self.ca_bundle
+          configurable.token ||= token
+          configurable.server ||= server
+          configurable.ca_bundle ||= ca_bundle
           configurable.skip_verify =
             configurable.skip_verify ||
-            (configurable.skip_verify.nil? && self.skip_verify)
+            (configurable.skip_verify.nil? && skip_verify)
         end
 
         if configurable.use_rc ||
@@ -30,22 +30,22 @@ module Storedsafe
           configurable.api_key ||= rc.api_key
           configurable.server ||= rc.server
         end
+      end
 
-        def server
-          ENV['STOREDSAFE_SERVER']
-        end
+      def server
+        ENV['STOREDSAFE_SERVER']
+      end
 
-        def token
-          ENV['STOREDSAFE_TOKEN']
-        end
+      def token
+        ENV['STOREDSAFE_TOKEN']
+      end
 
-        def ca_bundle
-          ENV['STOREDSAFE_CABUNDLE']
-        end
+      def ca_bundle
+        ENV['STOREDSAFE_CABUNDLE']
+      end
 
-        def skip_verify
-          ENV['STOREDSAFE_SKIP_VERIFY']
-        end
+      def skip_verify
+        ENV['STOREDSAFE_SKIP_VERIFY']
       end
     end
   end
