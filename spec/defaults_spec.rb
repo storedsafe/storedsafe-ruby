@@ -107,8 +107,28 @@ describe Storedsafe::Defaults do
         @config.use_rc = true
         @config.use_env = true
 
+        token = "token"
+        server = "server"
+        ca_bundle = "ca_bundle"
+        skip_verify = "skip_verify"
+        username = "username"
+        api_key = "api_key"
+
+        @config.token = token
+        @config.server = server
+        @config.ca_bundle = ca_bundle
+        @config.skip_verify = skip_verify
+        @config.username = username
+        @config.api_key = api_key
+
         Storedsafe::Defaults.allocate(@config)
 
+        expect(@config.token).to eq(token)
+        expect(@config.server).to eq(server)
+        expect(@config.ca_bundle).to eq(ca_bundle)
+        expect(@config.skip_verify).to eq(skip_verify)
+        expect(@config.username).to eq(username)
+        expect(@config.api_key).to eq(api_key)
       end
     end
   end
