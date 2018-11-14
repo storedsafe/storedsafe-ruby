@@ -11,6 +11,4 @@ This is a ruby wrapper for the Storedsafe REST-like API.
 
 ## Medium Priority
 - [x] ~~Collect configuration options for rspec in support file~~ Changed how Defaults module works so only Configurable needs this information now, skipping support file.
-
-## Questions
-- [ ] Are all fields from the rc-file needed?
+- [ ] Look into persistent HTTP connection
