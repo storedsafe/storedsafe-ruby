@@ -1,18 +1,21 @@
+# freeze_string_literals: true
+
 require 'sinatra/base'
 
 class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
-  USERNAME = 'foo@example.com'.freeze
-  PASSPHRASE = 'ThisIsAPrettyLousyPassPhrase'.freeze
-  OTP = '123456'.freeze
-  APIKEY = 'My-API-Key'.freeze
-  KEYS = "#{PASSPHRASE}#{APIKEY}OhMyCouldThisReallyBeAnOTP".freeze
+  USERNAME = 'foo@example.com'
+  PASSPHRASE = 'ThisIsAPrettyLousyPassPhrase'
+  OTP = '123456'
+  APIKEY = 'My-API-Key'
+  KEYS = "#{PASSPHRASE}#{APIKEY}#{OTP}"
+  TOKEN = "StoredSafe-Token"
 
-  FIXTURES = 'spec/support/fixtures'.freeze
+  FIXTURES = 'spec/support/fixtures'
 
   before do
     content_type 'application/json'
     unless request.secure?
-      # halt 404
+      halt 404
     end
   end
 
@@ -25,19 +28,25 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
     response_from_file('error.json')
   end
 
+  def parse_body
+    request.body.rewind
+    JSON.parse(request.body.read)
+  end
+
   # Auth
   post '/api/1.0/auth' do
+    data = parse_body
     # HOTP auth
-    if params.key?('username') && params.key?('keys')
-      auth_hotp(params)
+    if data.key?('username') && data.key?('keys')
+      auth_hotp(data)
 
     # TOTP Auth
-    elsif params['username'] &&
-          params['passphrase'] &&
-          params['otp'] &&
-          params['apikey'] &&
-          params['logintype']
-      auth_totp(params)
+    elsif data['username'] &&
+          data['passphrase'] &&
+          data['otp'] &&
+          data['apikey'] &&
+          data['logintype']
+      auth_totp(data)
     # Missing parameters
     else
       status 403
@@ -45,9 +54,9 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
     end
   end
 
-  def auth_hotp(params)
-    if params['username'] == USERNAME &&
-       params['keys'] == KEYS
+  def auth_hotp(data)
+    if data['username'] == USERNAME &&
+       data['keys'] == KEYS
       status 200
       response_from_file('auth_hotp.json')
     else
@@ -56,11 +65,11 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
     end
   end
 
-  def auth_totp(params)
-    if params['username'] == USERNAME &&
-       params['passphrase'] == PASSPHRASE &&
-       params['otp'] == OTP &&
-       params['apikey'] == APIKEY
+  def auth_totp(data)
+    if data['username'] == USERNAME &&
+       data['passphrase'] == PASSPHRASE &&
+       data['otp'] == OTP &&
+       data['apikey'] == APIKEY
       status 200
       response_from_file('auth_totp.json')
     else
@@ -115,10 +124,11 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
 
   # Create vault
   post '/api/1.0/vault' do
-    if token_valid?(params) &&
-       params['groupname'] &&
-       params['policy'] &&
-       params['description']
+    data = parse_body
+    if token_valid?(data) &&
+       data['groupname'] &&
+       data['policy'] &&
+       data['description']
       status 200
       response_from_file('vault_create.json')
     else
@@ -129,10 +139,11 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
 
   # Edit vault
   put '/api/1.0/vault/:vault_id' do
-    if token_valid?(params) &&
-       params['groupname'] &&
-       # params['policy'] && # TODO: Handle optional parameter
-       params['description']
+    data = parse_body
+    if token_valid?(data) &&
+       data['groupname'] &&
+       # data['policy'] && # TODO: Handle optional parameter
+       data['description']
       status 200
       response_from_file('vault_edit.json')
     else
@@ -143,7 +154,8 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
 
   # Delete vault
   delete '/api/1.0/vault/:vault_id' do
-    if token_valid?(params)
+    data = parse_body
+    if token_valid?(data)
       status 200
       response_from_file('vault_delete.json')
     else
@@ -169,16 +181,17 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
 
   # Create object
   post '/api/1.0/object' do
-    if token_valid?(params) &&
-       params['templateid'] &&
-       params['groupid'] &&
-       params['parentid'] &&
-       params['objectname'] # &&
-      # params['host'] && # TODO: Handle template dependency
-      # params['username'] && # TODO: Handle template dependency
-      # params['info'] && # TODO: Handle template dependency
-      # params['password'] && # TODO: Handle template dependency
-      # params['cryptedinfo'] # TODO: Handle template dependency
+    data = parse_body
+    if token_valid?(data) &&
+       data['templateid'] &&
+       data['groupid'] &&
+       data['parentid'] &&
+       data['objectname'] # &&
+      # data['host'] && # TODO: Handle template dependency
+      # data['username'] && # TODO: Handle template dependency
+      # data['info'] && # TODO: Handle template dependency
+      # data['password'] && # TODO: Handle template dependency
+      # data['cryptedinfo'] # TODO: Handle template dependency
       status 200
       response_from_file('object_create.json')
     else
@@ -189,16 +202,17 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
 
   # Edit object
   put '/api/1.0/object/:object_id' do
-    if token_valid?(params) &&
-       params['templateid'] &&
-       params['groupid'] &&
-       params['parentid'] &&
-       params['objectname'] # &&
-      # params['host'] && # TODO: Handle template dependency
-      # params['username'] && # TODO: Handle template dependency
-      # params['info'] && # TODO: Handle template dependency
-      # params['password'] && # TODO: Handle template dependency
-      # params['cryptedinfo'] # TODO: Handle template dependency
+    data = parse_body
+    if token_valid?(data) &&
+       data['templateid'] &&
+       data['groupid'] &&
+       data['parentid'] &&
+       data['objectname'] # &&
+      # data['host'] && # TODO: Handle template dependency
+      # data['username'] && # TODO: Handle template dependency
+      # data['info'] && # TODO: Handle template dependency
+      # data['password'] && # TODO: Handle template dependency
+      # data['cryptedinfo'] # TODO: Handle template dependency
       status 200
       response_from_file('object_edit.json')
     else
@@ -208,7 +222,8 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
   end
 
   delete '/api/1.0/object/:object_id' do
-    if token_valid?(params)
+    data = parse_body
+    if token_valid?(data)
       status 200
       response_from_file('object_delete.json')
     else

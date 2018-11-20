@@ -3,23 +3,19 @@ require 'storedsafe'
 describe Storedsafe::Configurable do
   subject { (Class.new { include Storedsafe::Configurable }).new }
 
-  # Mandatory server and credentials
-  it { should have_attr_accessor(:server) }
-  it { should have_attr_accessor(:token) }
+  fields = %i[
+    server token ca_bundle skip_verify use_rc rc_path
+    use_env api_version username api_key
+  ]
 
-  # Certificate verification settings
-  it { should have_attr_accessor(:ca_bundle) }
-  it { should have_attr_accessor(:skip_verify) }
+  fields.each do |field|
+    it { should have_attr_accessor(field) }
+  end
 
-  # Configuration opions
-  it { should have_attr_accessor(:use_rc) }
-  it { should have_attr_accessor(:rc_path) }
-  it { should have_attr_accessor(:use_env) }
-
-  # Optional authentication configuration
-  it { should have_attr_accessor(:username) }
-  it { should have_attr_accessor(:passphrase) }
-  it { should have_attr_accessor(:hotp) }
-  it { should have_attr_accessor(:totp) }
-  it { should have_attr_accessor(:api_key) }
+  it 'should only have specified attr_accessor methods' do
+    # Regex removes setters (ending with =)
+    methods = Storedsafe::Configurable.instance_methods.grep(/.*(?<!=)$/)
+    expect(methods - fields).to eq([])
+    expect(fields - methods).to eq([])
+  end
 end

@@ -5,10 +5,10 @@ require 'storedsafe'
 # tests for the API class.
 describe Storedsafe do
   describe '.configure' do
-    it 'returns an API instance' do
+    it 'returns an APIHandler instance' do
       api = Storedsafe.configure do |config|
       end
-      expect(api).to be_instance_of(Storedsafe::API)
+      expect(api).to be_instance_of(Storedsafe::API::APIHandler)
     end
   end
 end

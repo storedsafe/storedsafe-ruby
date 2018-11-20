@@ -1,7 +1,7 @@
 {
     "DATA": {
         "username": "foo@example.com",
-        "keys": "ThisIsAPrettyLousyPassPhraseMy-API-KeyOhMyCouldThisReallyBeAnOTP"
+        "keys": "ThisIsAPrettyLousyPassPhraseMy-API-Key123456"
     },
     "PARAMS": [],
     "CALLINFO": {
