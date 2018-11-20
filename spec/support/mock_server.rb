@@ -3,6 +3,9 @@
 require 'sinatra/base'
 
 class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
+
+  set :show_exceptions, false
+
   USERNAME = 'foo@example.com'
   PASSPHRASE = 'ThisIsAPrettyLousyPassPhrase'
   OTP = '123456'
@@ -93,7 +96,7 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
   get '/api/1.0/auth/check' do
     if token_valid?(params)
       status 200
-      response_from_file('check.json')
+      response_from_file('auth_check.json')
     else
       status 403
       error_response
@@ -271,7 +274,7 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
     def token_valid?(params)
       token = params['token']
       if token
-      # TODO: Verify token
+        return token == TOKEN
       else false
       end
     end

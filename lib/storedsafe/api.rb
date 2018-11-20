@@ -16,6 +16,16 @@ module Storedsafe
     class APIHandler
       include Configurable
 
+      FIELD_ERRORS = 'ERRORS'
+      FIELD_DATA = 'DATA'
+      FIELD_PARAMS = 'PARAMS'
+      FIELD_CALLINFO = 'CALLINFO'
+
+      STATUS_SUCCESS = 'SUCCESS'
+      STATUS_FAIL = 'FAIL'
+
+      ##
+      # Authenticate using a Yubico OTP.
       def authenticate_yubikey(passphrase, otp)
         res = Auth.authenticate_yubikey(
           method(:request),
@@ -24,8 +34,48 @@ module Storedsafe
           api_key: @api_key,
           otp: otp
         )
-        data = JSON.parse(res.body)
-        @token = data['CALLINFO']['token']
+        data = parse_body(res)
+        @token = data[FIELD_CALLINFO]['token']
+        @token
+      end
+
+      ##
+      # Authenticate using OTP method other than Yubico.
+      def authenticate_otp(passphrase, otp, logintype='totp')
+        res = Auth.authenticate_otp(
+          method(:request),
+          username: @username,
+          passphrase: passphrase,
+          api_key: @api_key,
+          otp: otp,
+          logintype: logintype
+        )
+        data = parse_body(res)
+        @token = data[FIELD_CALLINFO]['token']
+        @token
+      end
+
+      ##
+      # Log out current user.
+      def logout
+        res = Auth.logout(
+          method(:request),
+          token: @token
+        )
+        @token = nil if res.code == '200'
+      end
+
+      ##
+      # Check if the current token is valid and refresh the timeout if it is.
+      # @return [Boolean] true if the token is valid, otherwise false.
+      def check_token?
+        return false if token.nil?
+        res = Auth.check(
+          method(:request),
+          token: @token
+        )
+        data = parse_body(res)
+        return data[FIELD_CALLINFO]['status'] == STATUS_SUCCESS
       end
 
       ##
@@ -90,6 +140,10 @@ module Storedsafe
         request         = Net::HTTP::Post.new(uri, headers)
         request.body    = params.to_json
         request
+      end
+
+      def parse_body(response)
+        JSON.parse(response.body)
       end
     end
   end

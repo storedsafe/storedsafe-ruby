@@ -22,7 +22,7 @@ WebMock.disable_net_connect!(allow_localhost: true)
 STOREDSAFE_SERVER = 'storedsafe.example.com'.freeze
 
 RSpec.configure do |config|
-  config.before(:each) do
+  config.before(:each, :type => :api) do
     base_uri = STOREDSAFE_SERVER
     stub_request(:any, /#{Regexp.quote(base_uri)}/).to_rack(MockServer)
   end

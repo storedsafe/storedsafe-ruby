@@ -41,7 +41,7 @@ module Storedsafe
             otp: args[:otp],
             logintype: args[:login_type]
           }
-          callback.call(:get, '/auth', params)
+          callback.call(:post, '/auth', params)
         end
 
         ##
