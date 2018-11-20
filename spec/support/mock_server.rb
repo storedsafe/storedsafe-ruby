@@ -35,7 +35,8 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
     elsif params['username'] &&
           params['passphrase'] &&
           params['otp'] &&
-          params['apikey']
+          params['apikey'] &&
+          params['logintype']
       auth_totp(params)
     # Missing parameters
     else
