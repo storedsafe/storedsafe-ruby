@@ -1,5 +1,8 @@
 require 'storedsafe'
 
+##
+# The API class is split into several files, spec files for other parts of the
+# API class should be put in separate spec files like api_<filename>_spec.rb.
 describe Storedsafe::API do
   describe '.new' do
     context 'with manually assigned config' do
@@ -11,7 +14,7 @@ describe Storedsafe::API do
         username = 'username'
         api_key = 'api_key'
 
-        api = Storedsafe::API::APIHandler.new do |config|
+        api = Storedsafe::API.new do |config|
           config.server = server
           config.token = token
           config.ca_bundle = ca_bundle
@@ -26,65 +29,6 @@ describe Storedsafe::API do
         expect(api.skip_verify).to eq(skip_verify)
         expect(api.username).to eq(username)
         expect(api.api_key).to eq(api_key)
-      end
-    end
-  end
-
-  describe '.authenticate_yubikey', :type => :api do
-    it 'successfully receives a token' do
-      api = Storedsafe::API::APIHandler.new do |config|
-        config.server = STOREDSAFE_SERVER
-        config.username = MockServer::USERNAME
-        config.api_key = MockServer::APIKEY
-        config.token = nil
-      end
-      api.authenticate_yubikey(MockServer::PASSPHRASE, MockServer::OTP)
-      expect(api.token).to eq(MockServer::TOKEN)
-    end
-  end
-
-  describe '.authenticate_otp', :type => :api do
-    it 'successfully receives a token' do
-      api = Storedsafe::API::APIHandler.new do |config|
-        config.server = STOREDSAFE_SERVER
-        config.username = MockServer::USERNAME
-        config.api_key = MockServer::APIKEY
-        config.token = nil
-      end
-      api.authenticate_otp(MockServer::PASSPHRASE, MockServer::OTP)
-      expect(api.token).to eq(MockServer::TOKEN)
-    end
-  end
-
-  describe '.logout', :type => :api do
-    it 'successfully invalidates the token' do
-      api = Storedsafe::API::APIHandler.new do |config|
-        config.server = STOREDSAFE_SERVER
-        config.token = MockServer::TOKEN
-      end
-      api.logout
-      expect(api.token).to eq(nil)
-    end
-  end
-
-  describe '.check?', :type => :api do
-    context 'with valid token' do
-      it 'returns true' do
-        api = Storedsafe::API::APIHandler.new do |config|
-          config.server = STOREDSAFE_SERVER
-          config.token = MockServer::TOKEN
-        end
-        expect(api.check_token?).to eq(true)
-      end
-    end
-
-    context 'with invalid token' do
-      it 'returns false' do
-        api = Storedsafe::API::APIHandler.new do |config|
-          config.server = STOREDSAFE_SERVER
-          config.token = MockServer::TOKEN + 'invalid'
-        end
-        expect(api.check_token?).to eq(false)
       end
     end
   end

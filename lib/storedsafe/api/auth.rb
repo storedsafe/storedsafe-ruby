@@ -1,74 +1,51 @@
 # frozen_string_literal: true
 
 module Storedsafe
-  module API
+  ##
+  # Handles API requests to the /auth path.
+  class API
     ##
-    # Configures and sends API requests to the /auth path on the
-    # Storedsafe server.
-    module Auth
-      class << self
-        ##
-        # Authenticates a user with a Yubico OTP.
-        # @param [Method] callback Method that sends the API request.
-        # @param [Hash] args
-        # @option args [String] :username
-        # @option args [String] :passphrase
-        # @option args [String] :api_key
-        # @option args [String] :otp
-        # @see authenticate_otp Authentication with other OTP types.
-        def authenticate_yubikey(callback, args)
-          params = {
-            username: args[:username],
-            keys: "#{args[:passphrase]}#{args[:api_key]}#{args[:otp]}"
-          }
-          callback.call(:post, '/auth', params)
-        end
+    # Authenticates a user with a Yubico OTP.
+    # @see authenticate_otp Authentication with other OTP types.
+    def authenticate_yubikey(passphrase, otp)
+      res = request(
+        :post, '/auth',
+        username: @username, keys: "#{passphrase}#{@api_key}#{otp}"
+      )
+      data = parse_body(res)
+      @token = data['CALLINFO']['token']
+      data
+    end
 
-        ##
-        # Authenticates a user with a OTP other than Yubikey.
-        # @param [Method] callback Method that sends the API request.
-        # @param [Hash] args
-        # @option args [String] username
-        # @option args [String] passphrase
-        # @option args [String] otp
-        # @option args [String] api_key
-        # @option args [String] login_type
-        # @see authenticate_yubikey Authentication with Yubico OTP.
-        def authenticate_otp(callback, args)
-          params = {
-            username: args[:username],
-            passphrase: args[:passphrase],
-            otp: args[:otp],
-            logintype: args[:login_type]
-          }
-          callback.call(:post, '/auth', params)
-        end
+    ##
+    # Authenticates a user with specified OTP method.
+    def authenticate(passphrase, otp, logintype = AUTH_TOTP)
+      return authenticate_yubikey(passphrase, otp) if logintype == AUTH_YUBIKEY
+      res = request(
+        :post, '/auth',
+        username: @username, passphrase: passphrase, otp: otp,
+        apikey: @api_key, logintype: logintype
+      )
+      data = parse_body(res)
+      @token = data['CALLINFO']['token']
+      data
+    end
 
-        ##
-        # Invalidates the token.
-        # @param [Method] callback Method that sends the API request.
-        # @param [Hash] args
-        # @option args [String] token
-        def logout(callback, args)
-          params = {
-            token: args[:token]
-          }
-          callback.call(:get, '/auth/logout', params)
-        end
+    ##
+    # Invalidates the token.
+    def logout
+      res = request(:get, '/auth/logout', token: @token)
+      data = parse_body(res)
+      @token = nil if data['CALLINFO']['status'] == STATUS_SUCCESS
+      data
+    end
 
-        ##
-        # Checks whether or not the token is valid and refreshes the
-        # timeout for that token if valid.
-        # @param [Method] callback Method that sends the API request.
-        # @param [Hash] args
-        # @option args [String] token
-        def check(callback, args)
-          params = {
-            token: args[:token]
-          }
-          callback.call(:get, '/auth/check', params)
-        end
-      end
+    ##
+    # Checks whether or not the token is valid and refreshes the
+    # timeout for that token if valid.
+    def check
+      res = request(:get, '/auth/check', token: @token)
+      parse_body(res)
     end
   end
 end

@@ -9,13 +9,13 @@ module Storedsafe
     require_relative 'storedsafe/defaults'
 
     ##
-    # Set up a new APIHandler instance configured to communicate
+    # Set up a new API instance configured to communicate
     # with your Storedsafe server.
     # @see Storedsafe::Configurable for more information about
     #   the available fields for configuration.
     def configure
-      API::APIHandler.new do |api|
-        yield api
+      API.new do |api|
+        yield api if block_given?
       end
     end
   end

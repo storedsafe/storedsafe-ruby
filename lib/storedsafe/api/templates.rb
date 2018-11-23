@@ -2,12 +2,20 @@
 
 module Storedsafe
   ##
-  # Configures API requests to the /template path
-  module Templates
-    class << self
-      def list(); end
+  # Handles API requests to the /template path.
+  class API
+    ##
+    # Obtains a list with information about all available templates.
+    def list_templates
+      res = request(:get, '/template', token: @token)
+      parse_body(res)
+    end
 
-      def get(); end
+    ##
+    # Obtains information about the specified template.
+    def retrieve_template(template_id)
+      res = request(:get, "/template/#{template_id}", token: @token)
+      parse_body(res)
     end
   end
 end

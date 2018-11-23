@@ -1,72 +1,63 @@
 # frozen_string_literal: true
 
 module Storedsafe
-  module API
+  ##
+  # Handles API requests to the /object path.
+  class API
+    # rubocop:disable Metrics/ParameterLists
+
     ##
-    # Configures API requests to the /object path  on the
-    # Storedsafe server.
-    module Objects
-      class << self
-        ##
-        # Lists all information regarding an object and optionally
-        # decrypts encrypted fields.
-        # @param [Method] callback Method that sends the API request.
-        # @param [String] object_id ID of the object whose information
-        #   we wish to list.
-        # @param [Hash] args
-        # @option args [String] :token
-        # @option args [Boolean] :decrypt Optional
-        def get(callback, object_id, args); end
-
-        ##
-        # Creates a new object in an existing vault.
-        # @param [Method] callback Method that sends the API request.
-        # @param [Hash] args
-        # @option args [String] :token
-        # @option args [String] :template_id
-        # @option args [String] :group_id
-        # @option args [String] :parent_id
-        # @option args [String] :object_name
-        # @option args [String] :host Optional, template specific
-        # @option args [String] :username Optional, template specific
-        # @option args [String] :info Optional, template specific
-        # @option args [String] :password Optional, template specific
-        # @option args [String] :cryptedinfo Optional, template specific
-        def create(callback, args); end
-
-        ##
-        # Edits an existing object.
-        # @param [Method] callback Method that sends the API request.
-        # @param [String] object_id ID of the object we wish to edit.
-        # @param [Hash] args
-        # @option args [String] :token
-        # @option args [String] :template_id
-        # @option args [String] :group_id
-        # @option args [String] :parent_id
-        # @option args [String] :object_name
-        # @option args [String] :host Optional, template specific
-        # @option args [String] :username Optional, template specific
-        # @option args [String] :info Optional, template specific
-        # @option args [String] :password Optional, template specific
-        # @option args [String] :cryptedinfo Optional, template specific
-        def edit(callback, object_id, args); end
-
-        ##
-        # Deletes an existing object.
-        # @param [Method] callback Method that sends the API request.
-        # @param [String] object_id ID of the object we wish to delete.
-        # @param [Hash] args
-        # @option args [String] :token
-        def delete(callback, object_id, args); end
-
-        ##
-        # Search in unencrypted data to find an object.
-        # @param [Method] callback Method that sends the API request.
-        # @param [Hash] args
-        # @option args [String] :token
-        # @option args [String] :needle Case insensitive
-        def find(callback, args); end
-      end
+    # Lists all information regarding an object and optionally decrypts
+    # encrypted fields.
+    def list_information(object_id, decrypt = false)
+      res = request(
+        :get, "/object/#{object_id}", token: @token, decrypt: decrypt
+      )
+      parse_body(res)
     end
+
+    ##
+    # Creates a new object in an existing vault.
+    def create_object(
+      template_id, group_id, parent_id, object_name, template_args
+    )
+      res = request(
+        :post, '/object', {
+          token: @token, templateid: template_id, groupid: group_id,
+          parentid: parent_id, objectname: object_name
+        }.merge(template_args)
+      )
+      parse_body(res)
+    end
+
+    ##
+    # Edits an existing object.
+    def edit_object(
+      object_id, template_id, group_id, parent_id, object_name, template_args
+    )
+      res = request(
+        :put, "/object/#{object_id}", {
+          token: @token, templateid: template_id, groupid: group_id,
+          parentid: parent_id, objectname: object_name
+        }.merge(template_args)
+      )
+      parse_body(res)
+    end
+
+    ##
+    # Deletes an existing object.
+    def delete_object(object_id)
+      res = request(:delete, "/object/#{object_id}", token: @token)
+      parse_body(res)
+    end
+
+    ##
+    # Search in unencrypted data to find an object.
+    def find_object(needle)
+      res = request(:get, '/find', token: @token, needle: needle)
+      parse_body(res)
+    end
+
+    # rubocop:enable Metrics/ParameterLists
   end
 end

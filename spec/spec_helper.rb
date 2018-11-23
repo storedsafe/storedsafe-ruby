@@ -23,6 +23,10 @@ STOREDSAFE_SERVER = 'storedsafe.example.com'.freeze
 
 RSpec.configure do |config|
   config.before(:each, :type => :api) do
+    def response_from_file(file)
+      file = File.read("#{MockServer::FIXTURES}/#{file}")
+      JSON.parse(JSON.parse(file).to_json)
+    end
     base_uri = STOREDSAFE_SERVER
     stub_request(:any, /#{Regexp.quote(base_uri)}/).to_rack(MockServer)
   end

@@ -12,3 +12,4 @@ This is a ruby wrapper for the Storedsafe REST-like API.
 
 ## Medium Priority
 - [ ] Look into persistent HTTP connection
+- [ ] Look into Rake for generating docs and running tests
