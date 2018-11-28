@@ -6,6 +6,7 @@ require 'json'
 
 require_relative 'configurable'
 require_relative 'defaults'
+
 require_relative 'api/auth'
 require_relative 'api/objects'
 require_relative 'api/vaults'
@@ -15,14 +16,13 @@ module Storedsafe
   ##
   # Contains all interaction and configuration relating to the remote API.
   class API
-    STATUS_SUCCESS  = 'SUCCESS'
-    STATUS_FAIL     = 'FAIL'
-
-    AUTH_YUBIKEY    = 'yubikey'
-    AUTH_TOTP       = 'totp'
-    AUTH_SMARTCARD  = 'smc_rest'
-
     include Configurable
+
+    module LoginType
+      YUBIKEY    = 'yubikey'
+      TOTP       = 'totp'
+      SMARTCARD  = 'smc_rest'
+    end
 
     ##
     # Creates a new APIHandler instance with the passed configuration,
@@ -43,8 +43,6 @@ module Storedsafe
     #   root on the server.
     # @param [Hash] params Data to be sent with the request.
     def request(method, path, params)
-      return unless @server && @api_version
-
       url = "https://#{@server}/api/#{@api_version}#{path}"
       uri = URI.parse(url)
       http = Net::HTTP.new(uri.host, uri.port)
@@ -53,7 +51,7 @@ module Storedsafe
       assign_verify_mode(http)
       request = create_request(method, uri, params)
 
-      return http.request(request) if request
+      http.request(request) if request
     end
 
     def assign_verify_mode(http)
@@ -107,7 +105,8 @@ module Storedsafe
     end
 
     def parse_body(response)
-      JSON.parse(response.body)
+      body = response.body
+      @parser.parse_response(body)
     end
   end
 end

@@ -1,12 +1,13 @@
 require 'storedsafe'
 
 describe Storedsafe::API, :type => :api do
-  let(:api) {
+  let(:api) do
     Storedsafe::API.new do |config|
       config.server = STOREDSAFE_SERVER
       config.token = MockServer::TOKEN
+      config.parser = Storedsafe::Parser::RawParser
     end
-  }
+  end
 
   describe '.list_information' do
     context 'with default decrypt=false' do

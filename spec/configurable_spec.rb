@@ -5,7 +5,7 @@ describe Storedsafe::Configurable do
 
   fields = %i[
     server token ca_bundle skip_verify use_rc rc_path
-    use_env api_version username api_key
+    use_env api_version username api_key parser
   ]
 
   fields.each do |field|

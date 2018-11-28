@@ -13,6 +13,8 @@ module Storedsafe
 
     ##
     # Lists all objects within the specified Vault.
+    # @param [Integer] vault_id
+    # @see list_vaults
     def list_objects(vault_id)
       res = request(:get, "/vault/#{vault_id}", token: @token)
       parse_body(res)
@@ -21,6 +23,9 @@ module Storedsafe
     ##
     # Creates an empty Vault, setting current user as "Data Custodian".
     # Requires the authenticated user to have the "Create Vault" capability.
+    # @param [String] groupname Name of Vault.
+    # @param [Integer] policy Password policy.
+    # @param [String] description
     def create_vault(groupname, policy, description)
       res = request(
         :post, '/vault',
@@ -33,6 +38,7 @@ module Storedsafe
     ##
     # Changes information about an existing Vault using the optional
     # parameters passed in the last argument Hash.
+    # @param [Integer] vault_id
     # @param [Hash] args
     # @option args [String] groupname New name of Vault
     # @option args [Integer] policy New password policy
@@ -47,6 +53,7 @@ module Storedsafe
     # Requires the vault to be empty and the authenticated user to have the
     # "Create Vault" capability as well as being "Data Custodian" for the
     # specified Vault.
+    # @param [Integer] vault_id
     def delete_vault(vault_id)
       res = request(:delete, "/vault/#{vault_id}", token: @token)
       parse_body(res)

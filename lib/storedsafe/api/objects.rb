@@ -9,6 +9,8 @@ module Storedsafe
     ##
     # Lists all information regarding an object and optionally decrypts
     # encrypted fields.
+    # @param [Integer] object_id
+    # @param [Boolean] decrypt
     def list_information(object_id, decrypt = false)
       res = request(
         :get, "/object/#{object_id}", token: @token, decrypt: decrypt
@@ -18,6 +20,11 @@ module Storedsafe
 
     ##
     # Creates a new object in an existing vault.
+    # @param [Integer] template_id See Storedsafe::API#list_templates.
+    # @param [Integer] group_id Vault ID.
+    # @param [Integer] parent_id ID of parent Object.
+    # @param [String] object_name
+    # @param [Hash] template_args See Storedsafe::API#list_templates.
     def create_object(
       template_id, group_id, parent_id, object_name, template_args
     )
@@ -32,6 +39,13 @@ module Storedsafe
 
     ##
     # Edits an existing object.
+    # @param [Integer] object_id Object to edit.
+    # @param [Integer] template_id See Storedsafe::API#list_templates.
+    # @param [Integer] group_id Vault ID.
+    # @param [Integer] parent_id ID of parent Object.
+    # @param [String] object_name New Object name.
+    # @param [Hash] template_args New Object values,
+    #   see Storedsafe::API#list_templates.
     def edit_object(
       object_id, template_id, group_id, parent_id, object_name, template_args
     )
@@ -46,13 +60,15 @@ module Storedsafe
 
     ##
     # Deletes an existing object.
+    # @param [Integer] object_id
     def delete_object(object_id)
       res = request(:delete, "/object/#{object_id}", token: @token)
       parse_body(res)
     end
 
     ##
-    # Search in unencrypted data to find an object.
+    # Search in unencrypted data to find Objects.
+    # @param [String] needle String to match Objects with.
     def find_object(needle)
       res = request(:get, '/find', token: @token, needle: needle)
       parse_body(res)

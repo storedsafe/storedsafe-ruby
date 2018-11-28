@@ -7,6 +7,7 @@ module Storedsafe
     require_relative 'storedsafe/api'
     require_relative 'storedsafe/configurable'
     require_relative 'storedsafe/defaults'
+    require_relative 'storedsafe/parser'
 
     ##
     # Set up a new API instance configured to communicate

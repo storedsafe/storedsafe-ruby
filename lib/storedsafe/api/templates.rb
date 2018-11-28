@@ -13,6 +13,8 @@ module Storedsafe
 
     ##
     # Obtains information about the specified template.
+    # @param [Integer] template_id
+    # @see list_templates
     def retrieve_template(template_id)
       res = request(:get, "/template/#{template_id}", token: @token)
       parse_body(res)

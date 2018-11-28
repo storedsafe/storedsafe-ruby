@@ -6,6 +6,7 @@ module Storedsafe
   ##
   module Defaults
     require_relative 'defaults/rc'
+    require_relative 'parser'
 
     # Default RC path.
     RC_PATH = File.join(Dir.home, '.storedsafe-client.rc')
@@ -19,6 +20,9 @@ module Storedsafe
     # The version of the Storedsafe API currently being used.
     API_VERSION = '1.0'
 
+    # The default parser to be used
+    PARSER = Parser::RawParser
+
     class << self
       ##
       # Allocate uninitialized values in a configurable object with
@@ -26,6 +30,7 @@ module Storedsafe
       # @param [Storedsafe::Configurable] configurable
       def allocate(configurable)
         configurable.api_version ||= API_VERSION
+        configurable.parser ||= PARSER
         configurable.use_env = USE_ENV if configurable.use_env.nil?
         configurable.use_rc = USE_RC if configurable.use_rc.nil?
 
