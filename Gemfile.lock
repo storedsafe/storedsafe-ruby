@@ -19,6 +19,8 @@ GEM
     rack-protection (2.0.4)
       rack
     rainbow (3.0.0)
+    rdoc (6.1.1)
+    redcarpet (3.4.0)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
@@ -53,15 +55,19 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
+    yard (0.9.16)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  rdoc (~> 6.1)
+  redcarpet (~> 3.4)
   rspec (~> 3.7)
   rubocop (~> 0.57.2)
   sinatra (~> 2.0)
   webmock (~> 3.4)
+  yard (~> 0.9.16)
 
 BUNDLED WITH
-   1.16.4
+   2.0.1
