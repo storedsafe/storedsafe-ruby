@@ -18,10 +18,12 @@ module Storedsafe
   class API
     include Configurable
 
+    ##
+    # Supported Login Types
     module LoginType
-      YUBIKEY    = 'yubikey'
-      TOTP       = 'totp'
-      SMARTCARD  = 'smc_rest'
+      YUBIKEY    = 'yubikey'  # HOTP with Yubico YubiKey device
+      TOTP       = 'totp'     # Time-Based OTP using Authenticator
+      SMARTCARD  = 'smc_rest' # Smartcard
     end
 
     ##

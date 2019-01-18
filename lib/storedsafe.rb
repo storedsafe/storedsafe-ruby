@@ -4,10 +4,10 @@
 # Ruby wrapper for the Storedsafe RESTlike API.
 module Storedsafe
   class << self
-    require_relative 'storedsafe/api'
-    require_relative 'storedsafe/configurable'
-    require_relative 'storedsafe/defaults'
-    require_relative 'storedsafe/parser'
+    require 'storedsafe/api'
+    require 'storedsafe/configurable'
+    require 'storedsafe/defaults'
+    require 'storedsafe/parser'
 
     ##
     # Set up a new API instance configured to communicate
