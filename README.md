@@ -2,15 +2,13 @@
 
 This is a ruby wrapper for the Storedsafe REST-like API (See full [docs here](https://tracker.storedsafe.com/projects/storedsafe20/wiki/Version_10_release_documentation)).
 
-**This early version may contain errors and is still subject to change and should be used with caution**
+**This early version may contain errors and is subject to change and should be used with caution**
 
 ## Install
 
-Install from rubygems
-`gem install storedsafe`
+Install from rubygems `gem install storedsafe`
 
-Add to gemfile
-`gem 'storedsafe', '~> 0.0.1'`
+Add to Gemfile `gem 'storedsafe', '~> 0.0.1'`
 
 ## Usage
 To pass a manual configuration, you simply pass a block to *Storedsafe.configure*.
@@ -24,24 +22,30 @@ end
 ```
 
 If you only want to use the built-in defaults you can skip the block.
-`api = Storedsafe.configure`
+```
+api = Storedsafe.configure
+```
 
-See [Configuration](#Configuration) for more info about default values and external configuration sources.
+See [Configuration](#configuration) for more info about default values and external configuration sources.
 
-All methods of the **Storedsafe::API** object returns the data parsed by whichever parser is listed in your config's *parser* field. By default the **Storedsafe::Parser::RawParser** is used, which simply turns the returned JSON data into a Ruby hash.
+All methods of the `Storedsafe::API` object returns the data parsed by whichever parser is listed in your config's *parser* field. By default the `Storedsafe::Parser::RawParser` is used, which simply turns the returned JSON data into a Ruby hash.
 
 ### Authentication
 If you already have a token from another source, you can enter it in the config and skip this section.
 
-Three forms of authentication are currently availble. Either by the default *TOTP* (Storedsafe::API::LogintType::TOTP), *yubikey* (Storedsafe::API::LoginType::YUBIKEY) or *smartcard* (Storedsafe::API::LoginType::SMARTCARD).
+Three forms of authentication are currently availble. Either by the default *TOTP* (`Storedsafe::API::LogintType::TOTP`), *yubikey* (`Storedsafe::API::LoginType::YUBIKEY`) or *smartcard* (`Storedsafe::API::LoginType::SMARTCARD`).
 
 NOTE: Make sure all other relevant fields are set on the Storedsafe::API object (username, api\_key)
 
 Example authenticating using TOTP (sets the *token* field of the Storedsafe::API object).
-`api.authenticate('abc123', '123456')`
+```
+api.authenticate('abc123', '123456')
+```
 
 Example authenticating using YubiKey.
-`api.authenticate('abc123', 'abcdef123456', Storedsafe::API::LoginType::YUBIKEY)`
+```
+api.authenticate('abc123', 'abcdef123456', Storedsafe::API::LoginType::YUBIKEY)
+```
 
 ### Vaults
 * list\_vaults
