@@ -10,12 +10,12 @@ describe Storedsafe::API, :type => :api do
     end
   end
 
-  describe '.list_information' do
+  describe '.object' do
     context 'with default decrypt=false' do
       it 'returns success response without decrypted information' do
         object_id = 1
 
-        res = api.list_information(object_id)
+        res = api.object(object_id)
         expect(res).to eq(response_from_file('object.json'))
       end
     end
@@ -25,7 +25,7 @@ describe Storedsafe::API, :type => :api do
         object_id = 1
         decrypt = true
 
-        res = api.list_information(object_id, decrypt)
+        res = api.object(object_id, decrypt)
         expect(res).to eq(response_from_file('object_decrypt.json'))
       end
     end

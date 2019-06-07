@@ -11,7 +11,7 @@ module Storedsafe
     # encrypted fields.
     # @param [Integer] object_id
     # @param [Boolean] decrypt
-    def list_information(object_id, decrypt = false)
+    def object(object_id, decrypt = false)
       res = request(
         :get, "/object/#{object_id}", token: @token, decrypt: decrypt
       )
