@@ -10,7 +10,10 @@ module Storedsafe
       ##
       # Read configuration from Storedsafe RC file.
       # @param [String] path Path to RC file.
-      def initialize(path)
+      def initialize(path = File.join(
+        Dir.home,
+        '.storedsafe-client.rc'
+      ))
         @path = path
         @config = {}
       end

@@ -4,14 +4,14 @@ class FakeConfigurable
   include Storedsafe::Config::Configurable
 end
 
-RC_FILE_NAME = File.join(Dir.tmpdir, '.storedsafe-client.rc')
-
 describe Storedsafe::Config do
+  rc_file_name = File.join(Dir.tmpdir, '.storedsafe-client.rc')
+
   describe '.apply' do
     before(:each) do
       @fc = FakeConfigurable.new
 
-      @rc = Storedsafe::Config::RcReader.new(RC_FILE_NAME)
+      @rc = Storedsafe::Config::RcReader.new(rc_file_name)
       @env = Storedsafe::Config::EnvReader.new
 
       @env_token = "env_token"
@@ -33,7 +33,7 @@ describe Storedsafe::Config do
       allow(ENV).to receive(:[]).with('STOREDSAFE_SKIP_VERIFY')
         .and_return(@env_skip_verify)
 
-      File.open(RC_FILE_NAME, 'w') do |file|
+      File.open(rc_file_name, 'w') do |file|
         file.puts "token:#{@rc_token}"
         file.puts "username:#{@rc_username}"
         file.puts "apikey:#{@rc_api_key}"
@@ -42,7 +42,7 @@ describe Storedsafe::Config do
     end
 
     after(:each) do
-      File.delete(RC_FILE_NAME)
+      File.delete(rc_file_name)
     end
 
     context 'with no configuration sources' do

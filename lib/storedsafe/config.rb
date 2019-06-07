@@ -16,7 +16,7 @@ module Storedsafe
     # Default configuration values
     DEFAULTS = {
       config_sources: [
-        RcReader.new(File.join(Dir.home, '.storedsafe-client.rc')),
+        RcReader.new,
         EnvReader.new
       ],
       api_version: '1.0',

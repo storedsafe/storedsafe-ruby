@@ -7,15 +7,15 @@ describe Storedsafe::Config::RcReader do
     apikey = '1a2B3c4D'
     mysite = 'storedsafe.example.com'
 
-    RC_FILE_NAME = File.join(Dir.tmpdir, '.storedsafe-client.rc')
-    File.open(RC_FILE_NAME, 'w') do |file|
+    rc_file_name = File.join(Dir.tmpdir, '.storedsafe-client.rc')
+    File.open(rc_file_name, 'w') do |file|
       file.puts "token:#{token}"
       file.puts "username:#{username}"
       file.puts "apikey:#{apikey}"
       file.puts "mysite:#{mysite}"
     end
 
-    rc = Storedsafe::Config::RcReader.new(RC_FILE_NAME)
+    rc = Storedsafe::Config::RcReader.new(rc_file_name)
     config = rc.read
 
     expect(config[:token]).to eq(token)
@@ -23,6 +23,6 @@ describe Storedsafe::Config::RcReader do
     expect(config[:api_key]).to eq(apikey)
     expect(config[:server]).to eq(mysite)
 
-    File.delete(RC_FILE_NAME)
+    File.delete(rc_file_name)
   end
 end
