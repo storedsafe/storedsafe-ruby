@@ -7,6 +7,7 @@ describe Storedsafe::API do
   describe '.new' do
     context 'with manually assigned config' do
       it 'creates an API instance with given config' do
+        config_sources = []
         server = 'server'
         token = 'token'
         ca_bundle = 'ca_bundle'
@@ -15,6 +16,7 @@ describe Storedsafe::API do
         api_key = 'api_key'
 
         api = Storedsafe::API.new do |config|
+          config.config_sources = config_sources
           config.server = server
           config.token = token
           config.ca_bundle = ca_bundle
@@ -23,6 +25,7 @@ describe Storedsafe::API do
           config.api_key = api_key
         end
 
+        expect(api.config_sources).to eq(config_sources)
         expect(api.server).to eq(server)
         expect(api.token).to eq(token)
         expect(api.ca_bundle).to eq(ca_bundle)

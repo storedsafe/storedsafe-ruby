@@ -4,8 +4,7 @@ require 'net/http'
 require 'openssl'
 require 'json'
 
-require_relative 'configurable'
-require_relative 'defaults'
+require 'storedsafe/config'
 
 require_relative 'api/auth'
 require_relative 'api/objects'
@@ -16,7 +15,7 @@ module Storedsafe
   ##
   # Contains all interaction and configuration relating to the remote API.
   class API
-    include Configurable
+    include Storedsafe::Config::Configurable
 
     ##
     # Supported Login Types
@@ -27,13 +26,13 @@ module Storedsafe
     end
 
     ##
-    # Creates a new APIHandler instance with the passed configuration,
+    # Creates a new API handler with the passed configuration,
     # then allocates remaining uninitialized values with values from
     # alternate sources.
-    # @see Storedsafe::Defaults
+    # @see Storedsafe::Config
     def initialize
       yield self
-      Defaults.allocate(self)
+      Config.apply(self)
     end
 
     private

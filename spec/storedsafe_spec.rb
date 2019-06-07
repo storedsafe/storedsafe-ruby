@@ -7,6 +7,7 @@ describe Storedsafe do
   describe '.configure' do
     it 'returns an APIHandler instance' do
       api = Storedsafe.configure do |config|
+        config.config_sources = []
       end
       expect(api).to be_instance_of(Storedsafe::API)
     end

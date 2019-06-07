@@ -6,6 +6,7 @@ describe Storedsafe::API, :type => :api do
       config.server = STOREDSAFE_SERVER
       config.token = MockServer::TOKEN
       config.parser = Storedsafe::Parser::RawParser
+      config.config_sources = []
     end
   end
 
