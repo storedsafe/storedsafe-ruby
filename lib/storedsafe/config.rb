@@ -16,8 +16,8 @@ module Storedsafe
     # Default configuration values
     DEFAULTS = {
       config_sources: [
-        RcReader.new,
-        EnvReader.new
+        RcReader.parse_file,
+        EnvReader.parse_env
       ],
       api_version: '1.0',
       parser: Parser::RawParser
@@ -30,8 +30,8 @@ module Storedsafe
     def self.apply(configurable)
       apply_config(configurable, DEFAULTS)
 
-      configurable.config_sources.each do |source|
-        apply_config(configurable, source.read)
+      configurable.config_sources.each do |config|
+        apply_config(configurable, config)
       end
     end
 

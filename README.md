@@ -66,7 +66,7 @@ api.authenticate('abc123', 'abcdef123456', Storedsafe::API::LoginType::YUBIKEY)
 * find\_object(needle)
 
 ## Configuration
-Configuration can be done in a few different ways. Other than the manual configuration, external configuration sources can be defined in the *config\_sources* array. By default this array will contain a `Storedsafe::Config::RcReader` and a `Storedsafe::Config::EnvReader`.
+Configuration can be done in a few different ways. Other than the manual configuration, external configuration sources can be applied through the *config\_sources* array. This array contains Ruby Hashes with the fields that should be applied to the `Storedsafe::Config::Configurable` instance. By default fetch configurations through the `Storedsafe::Config::RcReader` and `Storedsafe::Config::EnvReader`.
 
 The order of priority between these different configuration sources are:
 1. Manual Configuration
@@ -85,21 +85,15 @@ api = Storedsafe.configure do |config|
 end
 ```
 
-To add your own external configuration source, you can use the template below.
+If you want to add your own configurations, simply add them to the config\_sources array.
 ```
-class CustomReader
-  def read
-    {
-      key: value
-    }
+def fetch_password(options, obj_id)
+  api = Storedsafe.configure do |config|
+    config.config_sources = [
+      options,
+      Storedsafe::Config::RcReader.parse_file('/path/to/.storedsafe-client.rc'),
+    ]
   end
-end
-```
-
-And then add it to the config_sources array.
-```
-api = Storedsafe.configure do |config|
-  config.config_sources = [CustomReader.new]
-  ...
+  api.object(obj_id, true)
 end
 ```

@@ -4,46 +4,39 @@ module Storedsafe
   module Config
     ##
     # Reads configuration items from rc file.
-    class RcReader
-      attr_reader :config
-
-      ##
-      # Read configuration from Storedsafe RC file.
-      # @param [String] path Path to RC file.
-      def initialize(path = File.join(
-        Dir.home,
-        '.storedsafe-client.rc'
-      ))
-        @path = path
-        @config = {}
-      end
-
-      ##
-      # Read values from file into the @config hash.
-      def read
-        if File.exists?(@path)
-          File.open(@path, 'r').each do |line|
-            key, val = line.split(':', 2)
-            key = key.strip
-            val = val.strip
-            parse_line(key, val)
+    module RcReader
+      class << self
+        ##
+        # Parses values from RC file into a hash.
+        def parse_file(path = File.join(
+          Dir.home,
+          '.storedsafe-client.rc'
+        ))
+          config = {}
+          if File.exist?(path)
+            File.open(path, 'r').each do |line|
+              key, val = line.split(':', 2)
+              key = key.strip
+              val = val.strip
+              parse_line(config, key, val)
+            end
           end
+          config
         end
-        @config
-      end
 
-      private
+        private
 
-      def parse_line(key, val)
-        case key
-        when 'token'
-          @config[:token] = val
-        when 'username'
-          @config[:username] = val
-        when 'apikey'
-          @config[:api_key] = val
-        when 'mysite'
-          @config[:server] = val
+        def parse_line(config, key, val)
+          case key
+          when 'token'
+            config[:token] = val
+          when 'username'
+            config[:username] = val
+          when 'apikey'
+            config[:api_key] = val
+          when 'mysite'
+            config[:server] = val
+          end
         end
       end
     end

@@ -17,8 +17,7 @@ describe Storedsafe::Config::EnvReader do
       allow(ENV).to receive(:[]).with('STOREDSAFE_SKIP_VERIFY')
         .and_return(skip_verify)
 
-      env = Storedsafe::Config::EnvReader.new
-      config = env.read
+      config = Storedsafe::Config::EnvReader.parse_env
 
       expect(config[:token]).to eq(token)
       expect(config[:server]).to eq(server)
@@ -43,13 +42,12 @@ describe Storedsafe::Config::EnvReader do
       allow(ENV).to receive(:[]).with('FAKE_SKIP_VERIFY')
         .and_return(skip_verify)
 
-      env = Storedsafe::Config::EnvReader.new({
+      config = Storedsafe::Config::EnvReader.parse_env({
         token: 'FAKE_TOKEN',
         server: 'FAKE_SERVER',
         ca_bundle: 'FAKE_CABUNDLE',
         skip_verify: 'FAKE_SKIP_VERIFY'
       })
-      config = env.read
 
       expect(config[:token]).to eq(token)
       expect(config[:server]).to eq(server)

@@ -11,9 +11,6 @@ describe Storedsafe::Config do
     before(:each) do
       @fc = FakeConfigurable.new
 
-      @rc = Storedsafe::Config::RcReader.new(rc_file_name)
-      @env = Storedsafe::Config::EnvReader.new
-
       @env_token = "env_token"
       @env_server = "env_server"
       @env_ca_bundle = "env_ca_bundle"
@@ -39,6 +36,9 @@ describe Storedsafe::Config do
         file.puts "apikey:#{@rc_api_key}"
         file.puts "mysite:#{@rc_server}"
       end
+
+      @rc = Storedsafe::Config::RcReader.parse_file(rc_file_name)
+      @env = Storedsafe::Config::EnvReader.parse_env
     end
 
     after(:each) do
@@ -60,6 +60,26 @@ describe Storedsafe::Config do
         # RC (server and token overlap with ENV)
         expect(@fc.username).to eq(nil)
         expect(@fc.api_key).to eq(nil)
+      end
+    end
+
+    context 'with hash config' do
+      it 'passes configuration from hash' do
+        token = 'token'
+        server = 'server'
+        api_key = 'api_key'
+
+        @fc.config_sources = [{
+          token: token,
+          server: server,
+          api_key: api_key
+        }]
+
+        Storedsafe::Config.apply(@fc)
+
+        expect(@fc.token).to eq(token)
+        expect(@fc.server).to eq(server)
+        expect(@fc.api_key).to eq(api_key)
       end
     end
 
@@ -123,12 +143,12 @@ describe Storedsafe::Config do
       it 'does not alter any values' do
         @fc.config_sources = [@rc, @env]
 
-        token = "token"
-        server = "server"
-        ca_bundle = "ca_bundle"
-        skip_verify = "skip_verify"
-        username = "username"
-        api_key = "api_key"
+        token = 'token'
+        server = 'server'
+        ca_bundle = 'ca_bundle'
+        skip_verify = 'skip_verify'
+        username = 'username'
+        api_key = 'api_key'
 
         @fc.token = token
         @fc.server = server

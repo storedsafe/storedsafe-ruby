@@ -15,8 +15,7 @@ describe Storedsafe::Config::RcReader do
       file.puts "mysite:#{mysite}"
     end
 
-    rc = Storedsafe::Config::RcReader.new(rc_file_name)
-    config = rc.read
+    config = Storedsafe::Config::RcReader.parse_file(rc_file_name)
 
     expect(config[:token]).to eq(token)
     expect(config[:username]).to eq(username)
