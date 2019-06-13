@@ -2,7 +2,7 @@ Gem::Specification.new do |s|
   s.files = Dir.glob('lib/**/*') + %w(LICENSE README.md)
   s.require_paths = ['lib']
   s.name          = 'storedsafe'
-  s.version       = '0.0.1a'
+  s.version       = '0.0.2'
   s.summary       = 'Storedsafe is a ruby wrapper for the Storedsafe REST-like'\
                     ' API.'
 
