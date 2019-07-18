@@ -15,9 +15,8 @@ To pass a manual configuration, you simply pass a block to *Storedsafe.configure
 ```
 api = Storedsafe.configure do |config|
   config.server = 'storedsafe.example.com'
-  config.api_token = 'abc123'
+  config.api_key = 'abc123'
   config.token = 'secret'
-  config.username = 'bob'
 end
 ```
 
