@@ -12,6 +12,9 @@ require_relative 'api/vaults'
 require_relative 'api/templates'
 
 module Storedsafe
+  class ConnectionError < StandardError
+  end
+
   ##
   # Contains all interaction and configuration relating to the remote API.
   class API
@@ -54,6 +57,9 @@ module Storedsafe
 
       res = http.request(request) if request
       parse_body(res)
+
+    rescue SocketError => e
+      raise ConnectionError.new(e.message)
     end
 
     def assign_verify_mode(http)
