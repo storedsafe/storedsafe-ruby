@@ -7,8 +7,7 @@ module Storedsafe
     ##
     # Lists all Vaults associated with the logged in user.
     def list_vaults
-      res = request(:get, '/vault', token: @token)
-      parse_body(res)
+      request(:get, '/vault', token: @token)
     end
 
     ##
@@ -16,8 +15,7 @@ module Storedsafe
     # @param [Integer] vault_id
     # @see list_vaults
     def list_objects(vault_id)
-      res = request(:get, "/vault/#{vault_id}", token: @token)
-      parse_body(res)
+      request(:get, "/vault/#{vault_id}", token: @token)
     end
 
     ##
@@ -27,12 +25,11 @@ module Storedsafe
     # @param [Integer] policy Password policy.
     # @param [String] description
     def create_vault(groupname, policy, description)
-      res = request(
+      request(
         :post, '/vault',
         token: @token,
         groupname: groupname, policy: policy, description: description
       )
-      parse_body(res)
     end
 
     ##
@@ -44,8 +41,7 @@ module Storedsafe
     # @option args [Integer] policy New password policy
     # @option args [String] description New Vault description.
     def edit_vault(vault_id, args)
-      res = request(:put, "/vault/#{vault_id}", { token: @token }.merge(args))
-      parse_body(res)
+      request(:put, "/vault/#{vault_id}", { token: @token }.merge(args))
     end
 
     ##
@@ -55,8 +51,7 @@ module Storedsafe
     # specified Vault.
     # @param [Integer] vault_id
     def delete_vault(vault_id)
-      res = request(:delete, "/vault/#{vault_id}", token: @token)
-      parse_body(res)
+      request(:delete, "/vault/#{vault_id}", token: @token)
     end
   end
 end

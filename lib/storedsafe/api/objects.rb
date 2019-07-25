@@ -16,11 +16,10 @@ module Storedsafe
     def object(object_id, options = {})
       decrypt = options.fetch(:decrypt, false)
       children = options.fetch(:children, false)
-      res = request(
+      request(
         :get, "/object/#{object_id}",
         token: @token, decrypt: decrypt, children: children
       )
-      parse_body(res)
     end
 
     ##
@@ -33,13 +32,12 @@ module Storedsafe
     def create_object(
       template_id, group_id, parent_id, object_name, template_args
     )
-      res = request(
+      request(
         :post, '/object', {
           token: @token, templateid: template_id, groupid: group_id,
           parentid: parent_id, objectname: object_name
         }.merge(template_args)
       )
-      parse_body(res)
     end
 
     ##
@@ -54,29 +52,26 @@ module Storedsafe
     def edit_object(
       object_id, template_id, group_id, parent_id, object_name, template_args
     )
-      res = request(
+      request(
         :put, "/object/#{object_id}", {
           token: @token, templateid: template_id, groupid: group_id,
           parentid: parent_id, objectname: object_name
         }.merge(template_args)
       )
-      parse_body(res)
     end
 
     ##
     # Deletes an existing object.
     # @param [Integer] object_id
     def delete_object(object_id)
-      res = request(:delete, "/object/#{object_id}", token: @token)
-      parse_body(res)
+      request(:delete, "/object/#{object_id}", token: @token)
     end
 
     ##
     # Search in unencrypted data to find Objects.
     # @param [String] needle String to match Objects with.
     def find(needle)
-      res = request(:get, '/find', token: @token, needle: needle)
-      parse_body(res)
+      request(:get, '/find', token: @token, needle: needle)
     end
 
     # rubocop:enable Metrics/ParameterLists

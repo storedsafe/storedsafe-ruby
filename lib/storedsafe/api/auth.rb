@@ -10,16 +10,13 @@ module Storedsafe
     # @param [String] otp Yubikey press
     # @see authenticate Authentication with other OTP types.
     def authenticate_yubikey(passphrase, otp)
-      res = request(
+      data = request(
         :post, '/auth',
         username: @username, keys: "#{passphrase}#{@api_key}#{otp}"
       )
-      data = parse_body(res)
       @token = data['CALLINFO']['token']
       data
     end
-
-    # rubocop:disable Metrics/MethodLength
 
     ##
     # Authenticates a user with specified OTP method.
@@ -31,23 +28,19 @@ module Storedsafe
         return authenticate_yubikey(passphrase, otp)
       end
 
-      res = request(
+      data = request(
         :post, '/auth',
         username: @username, passphrase: passphrase, otp: otp,
         apikey: @api_key, logintype: logintype
       )
-      data = parse_body(res)
       @token = data['CALLINFO']['token']
       data
     end
 
-    # rubocop:enable Metrics/MethodLength
-
     ##
     # Invalidates the token.
     def logout
-      res = request(:get, '/auth/logout', token: @token)
-      data = parse_body(res)
+      data = request(:get, '/auth/logout', token: @token)
       @token = nil if data['CALLINFO']['status'] == 'SUCCESS'
       data
     end
@@ -56,8 +49,7 @@ module Storedsafe
     # Checks whether or not the token is valid and refreshes the
     # timeout for that token if valid.
     def check
-      res = request(:get, '/auth/check', token: @token)
-      parse_body(res)
+      request(:get, '/auth/check', token: @token)
     end
   end
 end

@@ -7,8 +7,7 @@ module Storedsafe
     ##
     # Obtains a list with information about all available templates.
     def list_templates
-      res = request(:get, '/template', token: @token)
-      parse_body(res)
+      request(:get, '/template', token: @token)
     end
 
     ##
@@ -16,8 +15,7 @@ module Storedsafe
     # @param [Integer] template_id
     # @see list_templates
     def retrieve_template(template_id)
-      res = request(:get, "/template/#{template_id}", token: @token)
-      parse_body(res)
+      request(:get, "/template/#{template_id}", token: @token)
     end
   end
 end

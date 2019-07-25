@@ -52,7 +52,8 @@ module Storedsafe
       assign_verify_mode(http)
       request = create_request(method, uri, params)
 
-      http.request(request) if request
+      res = http.request(request) if request
+      parse_body(res)
     end
 
     def assign_verify_mode(http)
