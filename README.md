@@ -10,6 +10,15 @@ Install from rubygems `gem install storedsafe`
 
 Add to Gemfile `gem 'storedsafe', '~> 0.0.2'`
 
+Alternatively, if you whish to install the gem manually, you can clone this repo and build the gem yourself.
+
+```
+git clone https://github.com/storedsafe/storedsafe-ruby
+cd storedsafe-ruby
+gem build storedsafe.gemspec
+gem install storedsafe-0.0.2.gem
+```
+
 ## Usage
 To pass a manual configuration, you simply pass a block to *Storedsafe.configure*.
 ```
@@ -62,7 +71,7 @@ api.authenticate('abc123', 'abcdef123456', Storedsafe::API::LoginType::YUBIKEY)
 * create\_object(template\_id, group\_id, parent\_id, object\_name, template\_args)
 * edit\_object(object\_id, template\_id, group\_id, parent\_id, object\_name, template\_args)
 * delete\_object(object\_id)
-* find\_object(needle)
+* find(needle)
 
 ## Configuration
 Configuration can be done in a few different ways. Other than the manual configuration, external configuration sources can be applied through the *config\_sources* array. This array contains Ruby Hashes with the fields that should be applied to the `Storedsafe::Config::Configurable` instance. By default fetch configurations through the `Storedsafe::Config::RcReader` and `Storedsafe::Config::EnvReader`.

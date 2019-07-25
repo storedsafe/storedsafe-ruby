@@ -92,11 +92,11 @@ describe Storedsafe::API, :type => :api do
     end
   end
 
-  describe '.find_object' do
+  describe '.find' do
     it 'returns success response' do
       needle = 'needle'
 
-      res = api.find_object(needle)
+      res = api.find(needle)
       expect(res).to eq(response_from_file('find.json'))
     end
   end

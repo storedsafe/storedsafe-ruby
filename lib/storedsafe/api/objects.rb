@@ -69,7 +69,7 @@ module Storedsafe
     ##
     # Search in unencrypted data to find Objects.
     # @param [String] needle String to match Objects with.
-    def find_object(needle)
+    def find(needle)
       res = request(:get, '/find', token: @token, needle: needle)
       parse_body(res)
     end
