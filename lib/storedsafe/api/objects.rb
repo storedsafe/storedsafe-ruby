@@ -10,20 +10,15 @@ module Storedsafe
     # Lists all information regarding an object and optionally decrypts
     # encrypted fields.
     # @param [Integer] object_id
-    # @param [Boolean] decrypt
-    def object(object_id, decrypt = false)
+    # @param [Hash] options
+    # @option options [Boolean] :decrypt (false)
+    # @option options [Boolean] :children (false)
+    def object(object_id, options = {})
+      decrypt = options.fetch(:decrypt, false)
+      children = options.fetch(:children, false)
       res = request(
-        :get, "/object/#{object_id}", token: @token, decrypt: decrypt
-      )
-      parse_body(res)
-    end
-
-    ##
-    # Lists all information regarding an object and its children.
-    # @param [Integer] object_id
-    def list_children(object_id)
-      res = request(
-        :get, "/object/#{object_id}", token: @token, children: true
+        :get, "/object/#{object_id}",
+        token: @token, decrypt: decrypt, children: children
       )
       parse_body(res)
     end
@@ -55,7 +50,7 @@ module Storedsafe
     # @param [Integer] parent_id ID of parent Object.
     # @param [String] object_name New Object name.
     # @param [Hash] template_args New Object values,
-    #   see Storedsafe::API#list_templates.
+    #  see Storedsafe::API#list_templates.
     def edit_object(
       object_id, template_id, group_id, parent_id, object_name, template_args
     )

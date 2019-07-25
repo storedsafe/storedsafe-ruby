@@ -11,8 +11,8 @@ describe Storedsafe::API, :type => :api do
   end
 
   describe '.object' do
-    context 'with default decrypt=false' do
-      it 'returns success response without decrypted information' do
+    context 'with options default values (decrypt and children false)' do
+      it 'returns success response without decrypted information or children' do
         object_id = 1
 
         res = api.object(object_id)
@@ -20,23 +20,35 @@ describe Storedsafe::API, :type => :api do
       end
     end
 
-    context 'with decrypt=true' do
+    context 'with decrypt: true' do
       it 'returns success response with decrypted data' do
         object_id = 1
         decrypt = true
 
-        res = api.object(object_id, decrypt)
+        res = api.object(object_id, decrypt: decrypt)
         expect(res).to eq(response_from_file('object_decrypt.json'))
       end
     end
-  end
 
-  describe '.list_children' do
-    it 'returns success response with children' do
-      object_id = 1
+    context 'with children: true' do
+      it 'returns success response with children' do
+        object_id = 1
+        children = true
 
-      res = api.list_children(object_id)
-      expect(res).to eq(response_from_file('object_children.json'))
+        res = api.object(object_id, children: children)
+        expect(res).to eq(response_from_file('object_children.json'))
+      end
+    end
+
+    context 'with decrypt: true and children: true' do
+      it 'returns error response for decrypting multiple objects at once' do
+        object_id = 1
+        decrypt = true
+        children = true
+
+        res = api.object(object_id, decrypt: decrypt, children: children)
+        expect(res).to eq(response_from_file('error.json'))
+      end
     end
   end
 
