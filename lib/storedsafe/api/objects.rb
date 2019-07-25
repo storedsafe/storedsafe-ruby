@@ -19,6 +19,16 @@ module Storedsafe
     end
 
     ##
+    # Lists all information regarding an object and its children.
+    # @param [Integer] object_id
+    def list_children(object_id)
+      res = request(
+        :get, "/object/#{object_id}", token: @token, children: true
+      )
+      parse_body(res)
+    end
+
+    ##
     # Creates a new object in an existing vault.
     # @param [Integer] template_id See Storedsafe::API#list_templates.
     # @param [Integer] group_id Vault ID.

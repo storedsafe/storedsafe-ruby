@@ -15,6 +15,22 @@
             "public": {
                 "name": "Disaster Recovery Instructions"
             }
+        },
+        "490": {
+            "id": "490",
+            "parentid": "489",
+            "templateid": "8",
+            "groupid": "179",
+            "status": "128",
+            "objectname": "Additional Information",
+            "filename": "",
+            "children": "0",
+            "notes": false,
+            "tags": "",
+            "alarmed": false,
+            "public": {
+                "name": "Additional Information"
+            }
         }
     },
     "TEMPLATESINFO": {

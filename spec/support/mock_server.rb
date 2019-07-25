@@ -172,8 +172,12 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
   get '/api/1.0/object/:object_id' do
     if token_valid?(params)
       status 200
-      if params['decrypt'] == "true"
+      if params['decrypt'] == 'true' and params['children'] == 'true'
+        error_response
+      elsif params['decrypt'] == 'true'
         response_from_file('object_decrypt.json')
+      elsif params['children'] == 'true'
+        response_from_file('object_children.json')
       else
         response_from_file('object.json')
       end

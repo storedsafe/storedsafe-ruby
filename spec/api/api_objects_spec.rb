@@ -31,6 +31,15 @@ describe Storedsafe::API, :type => :api do
     end
   end
 
+  describe '.list_children' do
+    it 'returns success response with children' do
+      object_id = 1
+
+      res = api.list_children(object_id)
+      expect(res).to eq(response_from_file('object_children.json'))
+    end
+  end
+
   describe '.create_object' do
     it 'returns success response' do
       template_id = 1

@@ -68,6 +68,7 @@ api.authenticate('abc123', 'abcdef123456', Storedsafe::API::LoginType::YUBIKEY)
 
 ### Objects
 * object(object\_id, decrypt=false)
+* list\_children(object\_id)
 * create\_object(template\_id, group\_id, parent\_id, object\_name, template\_args)
 * edit\_object(object\_id, template\_id, group\_id, parent\_id, object\_name, template\_args)
 * delete\_object(object\_id)
