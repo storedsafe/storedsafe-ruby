@@ -8,7 +8,7 @@ This is a ruby wrapper for the Storedsafe REST-like API (See full [docs here](ht
 
 Install from rubygems `gem install storedsafe`
 
-Add to Gemfile `gem 'storedsafe', '~> 0.0.2'`
+Add to Gemfile `gem 'storedsafe', '~> 0.0.3'`
 
 Alternatively, if you whish to install the gem manually, you can clone this repo and build the gem yourself.
 
@@ -16,7 +16,7 @@ Alternatively, if you whish to install the gem manually, you can clone this repo
 git clone https://github.com/storedsafe/storedsafe-ruby
 cd storedsafe-ruby
 gem build storedsafe.gemspec
-gem install storedsafe-0.0.2.gem
+gem install storedsafe-0.0.3.gem
 ```
 
 ## Usage
