@@ -6,11 +6,11 @@ require_relative 'config/configurable'
 require_relative 'config/rc_reader'
 require_relative 'config/env_reader'
 
-module Storedsafe
+module StoredSafe
   ##
   # Contains modules and classes related to parsing configuration sources and
   # merging said configurations into an object including the Configurable mixin.
-  # @see Storedsafe::Config::Configurable for more information about the
+  # @see StoredSafe::Config::Configurable for more information about the
   #   available fields for configuration.
   module Config
     # Default configuration values
@@ -19,14 +19,14 @@ module Storedsafe
         RcReader.parse_file,
         EnvReader.parse_env
       ],
-      api_version: '1.0',
+      version: '1.0',
       parser: Parser::RawParser
     }.freeze
 
     ##
     # Allocate uninitialized values in a configurable object with
     # values from environment variables or an RC-file.
-    # @param [Storedsafe::Config::Configurable] configurable
+    # @param [StoredSafe::Config::Configurable] configurable
     def self.apply(configurable)
       apply_config(configurable, DEFAULTS)
 

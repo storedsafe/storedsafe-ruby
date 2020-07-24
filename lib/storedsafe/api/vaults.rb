@@ -1,21 +1,29 @@
 # frozen_string_literal: true
 
-module Storedsafe
+module StoredSafe
   ##
   # Handles API requests to the /vault path.
   class API
     ##
     # Lists all Vaults associated with the logged in user.
     def list_vaults
-      request(:get, '/vault', token: @token)
+      request_get('/vault')
     end
 
     ##
     # Lists all objects within the specified Vault.
     # @param [Integer] vault_id
     # @see list_vaults
-    def list_objects(vault_id)
-      request(:get, "/vault/#{vault_id}", token: @token)
+    def vault_objects(vault_id)
+      request_get("/vault/#{vault_id}")
+    end
+
+    ##
+    # Lists all members with access to the specified Vault.
+    # @param [Integer] vault_id
+    # @see list_vaults
+    def vault_members(vault_id)
+      request_get("/vault/#{vault_id}/members")
     end
 
     ##
@@ -24,24 +32,18 @@ module Storedsafe
     # @param [String] groupname Name of Vault.
     # @param [Integer] policy Password policy.
     # @param [String] description
-    def create_vault(groupname, policy, description)
-      request(
-        :post, '/vault',
-        token: @token,
-        groupname: groupname, policy: policy, description: description
-      )
+    # @param [Hash] args (See API documentation)
+    def create_vault(args)
+      request_post('/vault', args)
     end
 
     ##
     # Changes information about an existing Vault using the optional
     # parameters passed in the last argument Hash.
     # @param [Integer] vault_id
-    # @param [Hash] args
-    # @option args [String] groupname New name of Vault
-    # @option args [Integer] policy New password policy
-    # @option args [String] description New Vault description.
+    # @param [Hash] args (See API documentation)
     def edit_vault(vault_id, args)
-      request(:put, "/vault/#{vault_id}", { token: @token }.merge(args))
+      request_put("/vault/#{vault_id}", args)
     end
 
     ##
@@ -51,7 +53,7 @@ module Storedsafe
     # specified Vault.
     # @param [Integer] vault_id
     def delete_vault(vault_id)
-      request(:delete, "/vault/#{vault_id}", token: @token)
+      request_delete("/vault/#{vault_id}")
     end
   end
 end

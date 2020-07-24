@@ -1,79 +1,53 @@
 # frozen_string_literal: true
 
-module Storedsafe
+module StoredSafe
   ##
   # Handles API requests to the /object path.
   class API
-    # rubocop:disable Metrics/ParameterLists
+    ##
+    # Lists all information regarding an object and optionally lists children
+    # of the object.
+    # @param [Integer] object_id
+    # @param [Boolean] children=false List object children
+    def get_object(object_id, children = false)
+      request_get("/object/#{object_id}", children: children)
+    end
 
     ##
-    # Lists all information regarding an object and optionally decrypts
-    # encrypted fields.
+    # Lists all information regarding an object, including decrypted
+    # information.
     # @param [Integer] object_id
-    # @param [Hash] options
-    # @option options [Boolean] :decrypt (false)
-    # @option options [Boolean] :children (false)
-    def object(object_id, options = {})
-      decrypt = options.fetch(:decrypt, false)
-      children = options.fetch(:children, false)
-      request(
-        :get, "/object/#{object_id}",
-        token: @token, decrypt: decrypt, children: children
-      )
+    def decrypt_object(object_id)
+      request_get("/object/#{object_id}", decrypt: true)
     end
 
     ##
     # Creates a new object in an existing vault.
-    # @param [Integer] template_id See Storedsafe::API#list_templates.
-    # @param [Integer] group_id Vault ID.
-    # @param [Integer] parent_id ID of parent Object.
-    # @param [String] object_name
-    # @param [Hash] template_args See Storedsafe::API#list_templates.
-    def create_object(
-      template_id, group_id, parent_id, object_name, template_args
-    )
-      request(
-        :post, '/object', {
-          token: @token, templateid: template_id, groupid: group_id,
-          parentid: parent_id, objectname: object_name
-        }.merge(template_args)
-      )
+    # @param [Hash] args (See API documentation)
+    def create_object(args)
+      request_post('/object', args)
     end
 
     ##
     # Edits an existing object.
     # @param [Integer] object_id Object to edit.
-    # @param [Integer] template_id See Storedsafe::API#list_templates.
-    # @param [Integer] group_id Vault ID.
-    # @param [Integer] parent_id ID of parent Object.
-    # @param [String] object_name New Object name.
-    # @param [Hash] template_args New Object values,
-    #  see Storedsafe::API#list_templates.
-    def edit_object(
-      object_id, template_id, group_id, parent_id, object_name, template_args
-    )
-      request(
-        :put, "/object/#{object_id}", {
-          token: @token, templateid: template_id, groupid: group_id,
-          parentid: parent_id, objectname: object_name
-        }.merge(template_args)
-      )
+    # @param [Hash] args (See API documentation)
+    def edit_object(object_id, args)
+      request_put("/object/#{object_id}", args)
     end
 
     ##
     # Deletes an existing object.
     # @param [Integer] object_id
     def delete_object(object_id)
-      request(:delete, "/object/#{object_id}", token: @token)
+      request_delete("/object/#{object_id}")
     end
 
     ##
     # Search in unencrypted data to find Objects.
     # @param [String] needle String to match Objects with.
     def find(needle)
-      request(:get, '/find', token: @token, needle: needle)
+      request_get('/find', needle: needle)
     end
-
-    # rubocop:enable Metrics/ParameterLists
   end
 end

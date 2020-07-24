@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-module Storedsafe
+module StoredSafe
   module Config
     ##
-    # Set up fields needed for configuration of Storedsafe connection.
+    # Set up fields needed for configuration of StoredSafe connection.
     module Configurable
       attr_accessor(
-        :server, :token, :ca_bundle, :skip_verify, :config_sources,
-        :username, :api_key, :api_version, :parser
+        :host, :token, :ca_bundle, :skip_verify,
+        :config_sources, :apikey, :version, :parser
       )
     end
   end

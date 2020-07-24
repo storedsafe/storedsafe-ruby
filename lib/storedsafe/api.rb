@@ -10,29 +10,23 @@ require_relative 'api/auth'
 require_relative 'api/objects'
 require_relative 'api/vaults'
 require_relative 'api/templates'
+require_relative 'api/users'
+require_relative 'api/misc'
 
-module Storedsafe
+module StoredSafe
   class ConnectionError < StandardError
   end
 
   ##
   # Contains all interaction and configuration relating to the remote API.
   class API
-    include Storedsafe::Config::Configurable
-
-    ##
-    # Supported Login Types
-    module LoginType
-      YUBIKEY    = 'yubikey'  # HOTP with Yubico YubiKey device
-      TOTP       = 'totp'     # Time-Based OTP using Authenticator
-      SMARTCARD  = 'smc_rest' # Smartcard
-    end
+    include StoredSafe::Config::Configurable
 
     ##
     # Creates a new API handler with the passed configuration,
     # then allocates remaining uninitialized values with values from
     # alternate sources.
-    # @see Storedsafe::Config
+    # @see StoredSafe::Config
     def initialize
       yield self
       Config.apply(self)
@@ -40,26 +34,52 @@ module Storedsafe
 
     private
 
+    def create_headers()
+      { 'X-Http-Token': @token }
+    end
+
+    def request_auth(**params)
+      request(
+        :post, '/auth',
+        apikey: @apikey, **params
+      )
+    end
+
+    def request_get(path, **params)
+      request(:get, path, params, create_headers)
+    end
+
+    def request_post(path, **params)
+      request(:post, path, params, create_headers)
+    end
+
+    def request_put(path, **params)
+      request(:put, path, params, create_headers)
+    end
+
+    def request_delete(path, **params)
+      request(:delete, path, params, create_headers)
+    end
+
     ##
     # Sends a request to the StoredSafe API.
     # @param [String] method HTTP method used for request.
     # @param [String] path Endpoint path relative to the API
     #   root on the server.
     # @param [Hash] params Data to be sent with the request.
-    def request(method, path, params)
-      url = "https://#{@server}/api/#{@api_version}#{path}"
+    def request(method, path, params, headers = {})
+      url = "https://#{@host}/api/#{@version}#{path}"
       uri = URI.parse(url)
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
 
       assign_verify_mode(http)
-      request = create_request(method, uri, params)
+      request = create_request(method, uri, params, headers)
 
       res = http.request(request) if request
       parse_body(res)
-
     rescue SocketError => e
-      raise ConnectionError.new(e.message)
+      raise ConnectionError, e.message
     end
 
     def assign_verify_mode(http)
@@ -72,43 +92,43 @@ module Storedsafe
       end
     end
 
-    def create_request(method, uri, params)
+    def create_request(method, uri, params, headers)
       case method
       when :get
-        create_get_request(uri, params)
+        create_get_request(uri, params, headers)
       when :post
-        create_post_request(uri, params)
+        create_post_request(uri, params, headers)
       when :delete
-        create_delete_request(uri, params)
+        create_delete_request(uri, params, headers)
       when :put
-        create_put_request(uri, params)
+        create_put_request(uri, params, headers)
       end
     end
 
-    def create_get_request(uri, params)
+    def create_get_request(uri, params, headers)
       uri.query   = URI.encode_www_form(params)
-      request     = Net::HTTP::Get.new(uri)
+      request     = Net::HTTP::Get.new(uri, headers)
       request
     end
 
-    def create_delete_request(uri, params)
-      headers         = { 'Content-Type': 'application/json' }
-      request         = Net::HTTP::Delete.new(uri, headers)
-      request.body    = params.to_json
+    def create_delete_request(uri, params, headers)
+      headers       = { 'Content-Type': 'application/json', **headers }
+      request       = Net::HTTP::Delete.new(uri, headers)
+      request.body  = params.to_json
       request
     end
 
-    def create_post_request(uri, params)
-      headers         = { 'Content-Type': 'application/json' }
-      request         = Net::HTTP::Post.new(uri, headers)
-      request.body    = params.to_json
+    def create_post_request(uri, params, headers)
+      headers       = { 'Content-Type': 'application/json', **headers }
+      request       = Net::HTTP::Post.new(uri, headers)
+      request.body  = params.to_json
       request
     end
 
-    def create_put_request(uri, params)
-      headers         = { 'Content-Type': 'application/json' }
-      request         = Net::HTTP::Put.new(uri, headers)
-      request.body    = params.to_json
+    def create_put_request(uri, params, headers)
+      headers       = { 'Content-Type': 'application/json', **headers }
+      request       = Net::HTTP::Put.new(uri, headers)
+      request.body  = params.to_json
       request
     end
 

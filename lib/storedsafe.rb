@@ -1,17 +1,19 @@
 # frozen_string_literal: true
 
-##
-# Ruby wrapper for the Storedsafe RESTlike API.
-module Storedsafe
-  class << self
-    require 'storedsafe/api'
-    require 'storedsafe/config'
-    require 'storedsafe/parser'
+require 'storedsafe/api'
+require 'storedsafe/config'
+require 'storedsafe/parser'
 
+##
+# Ruby wrapper for the StoredSafe RESTlike API.
+module StoredSafe
+  VERSION = '0.1.0'
+
+  class << self
     ##
-    # Set up a new API instance configured to communicate with your Storedsafe
+    # Set up a new API instance configured to communicate with your StoredSafe
     # server.
-    # @see Storedsafe::Config::Configurable for more information about the
+    # @see StoredSafe::Config::Configurable for more information about the
     #   available fields for configuration.
     def configure
       API.new do |api|

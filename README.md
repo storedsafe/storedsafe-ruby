@@ -1,14 +1,12 @@
-# Storedsafe API ruby wrapper
+# StoredSafe API ruby wrapper
 
-This is a ruby wrapper for the Storedsafe REST-like API (See full [docs here](https://tracker.storedsafe.com/projects/storedsafe20/wiki/Version_10_release_documentation)).
-
-**This early version may contain errors and is subject to change and should be used with caution**
+This is a ruby wrapper for the StoredSafe REST-like API (See full [docs here](https://developer.storedsafe.com/)).
 
 ## Install
 
 Install from rubygems `gem install storedsafe`
 
-Add to Gemfile `gem 'storedsafe', '~> 0.0.3'`
+Add to Gemfile `gem 'storedsafe', '~> 0.1.0'`
 
 Alternatively, if you whish to install the gem manually, you can clone this repo and build the gem yourself.
 
@@ -16,78 +14,72 @@ Alternatively, if you whish to install the gem manually, you can clone this repo
 git clone https://github.com/storedsafe/storedsafe-ruby
 cd storedsafe-ruby
 gem build storedsafe.gemspec
-gem install storedsafe-0.0.3.gem
+gem install storedsafe-0.1.0.gem
 ```
 
 ## Usage
-To pass a manual configuration, you simply pass a block to *Storedsafe.configure*.
-```
-api = Storedsafe.configure do |config|
-  config.server = 'storedsafe.example.com'
-  config.api_key = 'abc123'
-  config.token = 'secret'
+
+```ruby
+require 'storedsafe'
+api = StoredSafe.configure do |config|
+  config.host = 'my.site.com'
+  config.apikey = 'my-api-key'
 end
+
+# Auth
+api.login_totp('username', 'passphrase', 'otp')
+api.login_yubikey('username', 'passphrase', 'otp')
+api.logout()
+api.check()
+
+# Vaults
+api.list_vaults()
+api.vault_objects(vault_id)
+api.vault_members(vault_id)
+api.create_vault(**args) # See parameters in API documentation
+api.edit_vault(vault_id, **args)
+api.delete_vault(vault_id)
+
+# Objects
+api.get_object(object_id) # String or integer
+api.get_object(object_id, children=True) # children False by default
+api.decrypt_object(object_id)
+api.create_object(**args)
+api.edit_object(object_id, **args)
+api.delete_object(object_id)
+
+# Users
+api.list_users() # List all users
+api.list_users(user_id) # List specific user
+api.list_users(search_string) # Search for any user matching search_string
+api.create_user(**args)
+api.edit_user(user_id, **args)
+api.delete_user(user_id)
+
+# Utils
+api.status_values()
+api.password_policies()
+api.version()
+api.generate_password() # Use vault policy
+api.generate_password(**args)
 ```
 
-If you only want to use the built-in defaults you can skip the block.
-```
-api = Storedsafe.configure
-```
-
-See [Configuration](#configuration) for more info about default values and external configuration sources.
-
-All methods of the `Storedsafe::API` object returns the data parsed by whichever parser is listed in your config's *parser* field. By default the `Storedsafe::Parser::RawParser` is used, which simply turns the returned JSON data into a Ruby hash.
-
-### Authentication
-If you already have a token from another source, you can enter it in the config and skip this section.
-
-Three forms of authentication are currently availble. Either by the default *TOTP* (`Storedsafe::API::LogintType::TOTP`), *yubikey* (`Storedsafe::API::LoginType::YUBIKEY`) or *smartcard* (`Storedsafe::API::LoginType::SMARTCARD`).
-
-NOTE: Make sure all other relevant fields are set on the Storedsafe::API object (username, api\_key)
-
-Example authenticating using TOTP (sets the *token* field of the Storedsafe::API object).
-```
-api.authenticate('abc123', '123456')
-```
-
-Example authenticating using YubiKey.
-```
-api.authenticate('abc123', 'abcdef123456', Storedsafe::API::LoginType::YUBIKEY)
-```
-
-### Vaults
-* list\_vaults
-* list\_objects(vault\_id)
-* create\_vault(groupname, policy, description)
-* edit\_vault(vault\_id, { groupname, policy, description })
-* delete\_vault(vault\_id)
-
-### Templates
-* list\_templates
-* retrieve\_template(template\_id)
-
-### Objects
-* object(object\_id, decrypt: false, children: false)
-* create\_object(template\_id, group\_id, parent\_id, object\_name, template\_args)
-* edit\_object(object\_id, template\_id, group\_id, parent\_id, object\_name, template\_args)
-* delete\_object(object\_id)
-* find(needle)
 
 ## Configuration
-Configuration can be done in a few different ways. Other than the manual configuration, external configuration sources can be applied through the *config\_sources* array. This array contains Ruby Hashes with the fields that should be applied to the `Storedsafe::Config::Configurable` instance. By default fetch configurations through the `Storedsafe::Config::RcReader` and `Storedsafe::Config::EnvReader`.
+Configuration can be done in a few different ways. Other than the manual configuration, external configuration sources can be applied through the *config\_sources* array. This array contains Ruby Hashes with the fields that should be applied to the `StoredSafe::Config::Configurable` instance. By default fetch configurations through the `StoredSafe::Config::RcReader` and `StoredSafe::Config::EnvReader`.
 
 The order of priority between these different configuration sources are:
 1. Manual Configuration
 2. Built-in defaults
 3. Elements in the config\_sources array in order of appearance
 
-The **RcReader** will extract a configuration hash from a file (default is ~/.storedsafe-client.rc) which is generated by the [Storedsafe Tokenhandler](https://github.com/storedsafe/tokenhandler).
+The **RcReader** will extract a configuration hash from a file (default is ~/.storedsafe-client.rc) which is generated by the [StoredSafe Tokenhandler](https://github.com/storedsafe/tokenhandler).
 
 The **EnvReader** will extract a configuration hash from environment variables. By default these variables are `STOREDSAFE_SERVER`, `STOREDSAFE_TOKEN`, `STOREDSAFE_CABUNDLE` and `STOREDSAFE_SKIP_VERIFY`.
 
 To disable all external configuration sources such as the rc-file and environment vairables, set the *config\_sources* option to an empty array.
 ```
-api = Storedsafe.configure do |config|
+api = StoredSafe.configure do |config|
   config.config_sources = []
   ...
 end
@@ -96,10 +88,10 @@ end
 If you want to add your own configurations, simply add them to the config\_sources array.
 ```
 def fetch_password(options, obj_id)
-  api = Storedsafe.configure do |config|
+  api = StoredSafe.configure do |config|
     config.config_sources = [
       options,
-      Storedsafe::Config::RcReader.parse_file('/path/to/.storedsafe-client.rc'),
+      StoredSafe::Config::RcReader.parse_file('/path/to/.storedsafe-client.rc'),
     ]
   end
   api.object(obj_id, true)

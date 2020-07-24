@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Storedsafe
+module StoredSafe
   module Config
     ##
     # Reads configuration items from rc file.
@@ -30,12 +30,10 @@ module Storedsafe
           case key
           when 'token'
             config[:token] = val
-          when 'username'
-            config[:username] = val
           when 'apikey'
-            config[:api_key] = val
+            config[:apikey] = val
           when 'mysite'
-            config[:server] = val
+            config[:host] = val
           end
         end
       end

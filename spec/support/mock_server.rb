@@ -1,4 +1,4 @@
-# freeze_string_literals: true
+# frozen_string_literal: true
 
 require 'sinatra/base'
 
@@ -191,15 +191,15 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
   post '/api/1.0/object' do
     data = parse_body
     if token_valid?(data) &&
-        data['templateid'] &&
-        data['groupid'] &&
-        data['parentid'] &&
-        data['objectname'] &&
-        data['host'] &&
-        data['username'] &&
-        data['info'] &&
-        data['password'] &&
-        data['cryptedinfo']
+       data['templateid'] &&
+       data['groupid'] &&
+       data['parentid'] &&
+       data['objectname'] &&
+       data['host'] &&
+       data['username'] &&
+       data['info'] &&
+       data['password'] &&
+       data['cryptedinfo']
       status 200
       response_from_file('object_create.json')
     else
@@ -277,10 +277,8 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
     # Verify that token exists and that it is valid.
     def token_valid?(params)
       token = params['token']
-      if token
-        return token == TOKEN
-      else false
-      end
+      return token == TOKEN if token
+      false
     end
   end
 

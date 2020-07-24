@@ -20,6 +20,7 @@ require_relative 'support/mock_server'
 
 WebMock.disable_net_connect!(allow_localhost: true)
 STOREDSAFE_SERVER = 'storedsafe.example.com'.freeze
+ms = MockServer.new
 
 RSpec.configure do |config|
   config.before(:each, :type => :api) do
@@ -28,7 +29,7 @@ RSpec.configure do |config|
       JSON.parse(JSON.parse(file).to_json)
     end
     base_uri = STOREDSAFE_SERVER
-    stub_request(:any, /#{Regexp.quote(base_uri)}/).to_rack(MockServer)
+    stub_request(:any, /#{Regexp.quote(base_uri)}/).to_rack(ms)
   end
 
   config.expect_with :rspec do |expectations|

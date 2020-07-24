@@ -2,14 +2,14 @@
 
 require 'json'
 
-module Storedsafe
+module StoredSafe
   module Parser
     ##
-    # Transparent parser for the Storedsafe API.
+    # Transparent parser for the StoredSafe API.
     module RawParser
       class << self
         ##
-        # Transparently parses the Storedsafe API response into a ruby Hash.
+        # Transparently parses the StoredSafe API response into a ruby Hash.
         # @return [Hash]
         def parse_response(res)
           JSON.parse(res)
