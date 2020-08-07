@@ -34,7 +34,7 @@ module StoredSafe
 
     private
 
-    def create_headers()
+    def create_headers
       { 'X-Http-Token': @token }
     end
 

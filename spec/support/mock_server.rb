@@ -70,7 +70,6 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
   end
 
   def auth_totp(data)
-    puts("DEBUG: #{data}")
     if data['username'] == USERNAME &&
        data['passphrase'] == PASSPHRASE &&
        data['otp'] == OTP &&
@@ -180,6 +179,53 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
     end
   end
 
+  # List vault members
+  get '/api/1.0/vault/:vault_id/members' do
+    if token_valid?(request)
+      status 200
+      response_from_file('vault_members_list.json')
+    else
+      status 403
+      error_response
+    end
+  end
+
+  # Add member to vault
+  post '/api/1.0/vault/:vault_id/member/:user_id' do
+    data = parse_body
+    if token_valid?(request)
+      status 200
+      response_from_file('vault_members_add.json')
+    else
+      status 403
+      error_response
+    end
+  end
+
+  # Edit member privileges in vault
+  put '/api/1.0/vault/:vault_id/member/:user_id' do
+    data = parse_body
+    if token_valid?(request)
+      status 200
+      response_from_file('vault_members_edit.json')
+    else
+      status 403
+      error_response
+    end
+  end
+
+  # Remove member from vault
+  delete '/api/1.0/vault/:vault_id/member/:user_id' do
+    data = parse_body
+    if token_valid?(request)
+      status 200
+      response_from_file('vault_members_remove.json')
+    else
+      status 403
+      error_response
+    end
+  end
+
   # List objects
   get '/api/1.0/object/:object_id' do
     if token_valid?(request)
@@ -279,6 +325,50 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
     if token_valid?(request)
       status 200
       response_from_file('template_get.json')
+    else
+      status 403
+      error_response
+    end
+  end
+
+  # Status values
+  get '/api/1.0/utils/statusvalues' do
+    if token_valid?(request)
+      status 200
+      response_from_file('misc_status_values.json')
+    else
+      status 403
+      error_response
+    end
+  end
+
+  # Password policy
+  get '/api/1.0/utils/policies' do
+    if token_valid?(request)
+      status 200
+      response_from_file('misc_policies.json')
+    else
+      status 403
+      error_response
+    end
+  end
+
+  # StoredSafe version
+  get '/api/1.0/utils/version' do
+    if token_valid?(request)
+      status 200
+      response_from_file('misc_version.json')
+    else
+      status 403
+      error_response
+    end
+  end
+
+  # Generate password
+  get '/api/1.0/utils/pwgen' do
+    if token_valid?(request)
+      status 200
+      response_from_file('misc_pwgen.json')
     else
       status 403
       error_response

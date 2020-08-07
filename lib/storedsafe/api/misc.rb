@@ -19,13 +19,13 @@ module StoredSafe
     ##
     # Request the version of the StoredSafe server.
     def version
-      request_get('/utils/policies')
+      request_get('/utils/version')
     end
 
     ##
-    # Request a password generated with the passed settings (or vault policy).
-    def generate_password(args)
-      request_get('/utils/pwgen', args)
+    # Request a password generated with the passed settings.
+    def generate_password(**args)
+      request_get('/utils/pwgen', **args)
     end
   end
 end

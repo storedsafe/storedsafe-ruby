@@ -5,7 +5,7 @@
         "general": [],
         "handler": "VaultmembersHandler",
         "status": "SUCCESS",
-        "token": "rotated_storedsafe_token",
+        "token": "StoredSafe-Token",
         "vaultmembers": [
             {
                 "email": "sven@moo.se",
@@ -26,13 +26,13 @@
         ]
     },
     "DATA": {
-        "token": "your_storedsafe_token"
+        "token": "StoredSafe-Token"
     },
     "HEADERS": {
         "Accept": "*/*",
         "Host": "safe.domain.cc",
         "User-Agent": "curl/7.64.1",
-        "X-Http-Token": "your_storedsafe_token"
+        "X-Http-Token": "StoredSafe-Token"
     },
     "PARAMS": []
 }

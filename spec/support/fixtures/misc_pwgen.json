@@ -1,0 +1,23 @@
+{
+  "CALLINFO": {
+    "errorcodes": 0,
+    "errors": 0,
+    "general": [],
+    "handler": "UtilsHandler",
+    "status": "SUCCESS",
+    "passphrase": "Sz(6Q~si\"`WACS:b\\{[Y~A~Bs+dn\\uTrG5/eG}yf",
+    "length": 40,
+    "type": "secure",
+    "token": "StoredSafe-Token"
+  },
+  "DATA": {
+    "token": "StoredSafe-Token"
+  },
+  "HEADERS": {
+    "Accept": "*/*",
+    "Host": "safe.domain.cc",
+    "User-Agent": "curl/7.64.1",
+    "X-Http-Token": "StoredSafe-Token"
+  },
+  "PARAMS": []
+}

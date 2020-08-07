@@ -27,6 +27,35 @@ module StoredSafe
     end
 
     ##
+    # Add a member to the specified Vault.
+    # @param [Integer] vault_id
+    # @param [Integer] user_id
+    # @param [Integer] status
+    # @see list_vaults
+    def add_vault_member(vault_id, user_id, status)
+      request_post("/vault/#{vault_id}/member/#{user_id}", status: status)
+    end
+
+    ##
+    # Edit a member's privileges in the specified Vault.
+    # @param [Integer] vault_id
+    # @param [Integer] user_id
+    # @param [Integer] status
+    # @see list_vaults
+    def edit_vault_member(vault_id, user_id, status)
+      request_put("/vault/#{vault_id}/member/#{user_id}", status: status)
+    end
+
+    ##
+    # Remove a member from the specified Vault.
+    # @param [Integer] vault_id
+    # @param [Integer] user_id
+    # @see list_vaults
+    def remove_vault_member(vault_id, user_id)
+      request_delete("/vault/#{vault_id}/member/#{user_id}")
+    end
+
+    ##
     # Creates an empty Vault, setting current user as "Data Custodian".
     # Requires the authenticated user to have the "Create Vault" capability.
     # @param [String] groupname Name of Vault.

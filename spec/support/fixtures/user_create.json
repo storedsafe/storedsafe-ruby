@@ -1,0 +1,45 @@
+{
+  "CALLINFO": {
+    "calculated_status": 140,
+    "user": [
+      {
+        "id": "120",
+        "status": "129",
+        "username": "foomanchu",
+        "fullname": "Foo Manchu",
+        "email": "mrfoo@manchu.com",
+        "otpprefix": "cccjgjgkhcbb",
+        "fingerprint": "F09F01DDE2AFC972078D62B3F32057A33F58AF4E"
+      }
+    ],
+    "errorcodes": 0,
+    "errors": 0,
+    "general": [],
+    "handler": "UserHandler",
+    "status": "SUCCESS",
+    "token": "StoredSafe-Token",
+    "user_created": "Foo Manchu"
+  },
+  "DATA": {
+    "email": "mrfoo@manchu.com",
+    "fullname": "Foo Manchu",
+    "passphrase": "~[vN8-x9W6~7P367_vmwAQ53Y",
+    "status": [
+      2,
+      3,
+      7
+    ],
+    "token": "StoredSafe-Token",
+    "username": "foomanchu",
+    "yubikey": "cccjgjgkhcbbgefdkbbditfjrlnaggevfhenublfnrev"
+  },
+  "HEADERS": {
+    "Accept": "*/*",
+    "Content-Length": "169",
+    "Content-Type": "application/json",
+    "Host": "safe.domain.cc",
+    "User-Agent": "curl/7.64.1",
+    "X-Http-Token": "StoredSafe-Token"
+  },
+  "PARAMS": []
+}

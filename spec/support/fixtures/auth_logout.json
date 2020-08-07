@@ -1,12 +1,21 @@
 {
+    "CALLINFO": {
+        "logout": "Bye bye",
+        "errorcodes": 0,
+        "errors": 0,
+        "general": [],
+        "handler": "AuthHandler",
+        "status": "SUCCESS",
+        "token": "StoredSafe-Token"
+    },
     "DATA": {
         "token": "StoredSafe-Token"
     },
-    "PARAMS": [],
-    "CALLINFO": {
-        "token": "StoredSafe-Token",
-        "": "Bye bye",
-        "handler": "AuthHandler",
-        "status": "SUCCESS"
-    }
+    "HEADERS": {
+        "Accept": "*/*",
+        "Host": "safe.domain.cc",
+        "User-Agent": "curl/7.64.1",
+        "X-Http-Token": "StoredSafe-Token"
+    },
+    "PARAMS": []
 }

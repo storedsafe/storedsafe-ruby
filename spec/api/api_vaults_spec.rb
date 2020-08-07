@@ -33,6 +33,35 @@ describe StoredSafe::API, :type => :api do
     end
   end
 
+  describe '.add_vault_member' do
+    it 'returns success response' do
+      vault_id = 1
+      user_id = 2
+      status = 4
+      res = api.add_vault_member(vault_id, user_id, status)
+      expect(res).to eq(response_from_file('vault_members_add.json'))
+    end
+  end
+
+  describe '.edit_vault_member' do
+    it 'returns success response' do
+      vault_id = 1
+      user_id = 2
+      status = 2
+      res = api.edit_vault_member(vault_id, user_id, status)
+      expect(res).to eq(response_from_file('vault_members_edit.json'))
+    end
+  end
+
+  describe '.remove_vault_member' do
+    it 'returns success response' do
+      vault_id = 1
+      user_id = 2
+      res = api.remove_vault_member(vault_id, user_id)
+      expect(res).to eq(response_from_file('vault_members_remove.json'))
+    end
+  end
+
   describe '.create_vault' do
     it 'returns success response' do
       args = {

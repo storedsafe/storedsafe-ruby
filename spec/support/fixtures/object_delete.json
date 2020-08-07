@@ -1,12 +1,21 @@
 {
+    "CALLINFO": {
+        "message": "DELETED",
+        "errorcodes": 0,
+        "errors": 0,
+        "general": [],
+        "handler": "ObjectHandler",
+        "status": "SUCCESS",
+        "token": "StoredSafe-Token"
+    },
     "DATA": {
         "token": "StoredSafe-Token"
     },
-    "PARAMS": [],
-    "CALLINFO": {
-        "token": "StoredSafe-Token",
-        "": "DELETED",
-        "handler": "ObjectHandler",
-        "status": "SUCCESS"
-    }
+    "HEADERS": {
+        "Accept": "*/*",
+        "Host": "safe.domain.cc",
+        "User-Agent": "curl/7.64.1",
+        "X-Http-Token": "StoredSafe-Token"
+    },
+    "PARAMS": []
 }

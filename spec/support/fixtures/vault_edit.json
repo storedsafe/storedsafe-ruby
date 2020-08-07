@@ -1,24 +1,35 @@
 {
-    "GROUP": {
-        "178": {
-            "id": "178",
-            "groupname": "Firewalls in South Africa (ZA)",
-            "policy": "0",
+    "CALLINFO": {
+        "errorcodes": 0,
+        "errors": 0,
+        "general": [],
+        "handler": "VaultHandler",
+        "message": "Vault updated",
+        "status": "SUCCESS",
+        "token": "StoredSafe-Token"
+    },
+    "DATA": {
+        "description": "Login information and license keys.",
+        "groupname": "Firewalls in ZA",
+        "token": "StoredSafe-Token"
+    },
+    "HEADERS": {
+        "Accept": "*/*",
+        "Content-Length": "99",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Host": "safe.domain.cc",
+        "User-Agent": "curl/7.64.1",
+        "X-Http-Token": "StoredSafe-Token"
+    },
+    "PARAMS": [],
+    "VAULT": [
+        {
             "description": "Login information and license keys.",
+            "groupname": "Firewalls in ZA",
+            "id": "144",
+            "policy": "13",
             "status": "4",
             "statustext": "Admin"
         }
-    },
-    "DATA": {
-        "token": "StoredSafe-Token",
-        "groupname": "Firewalls in South Africa (ZA)",
-        "description": "Login information and license keys."
-    },
-    "PARAMS": [],
-    "CALLINFO": {
-        "token": "StoredSafe-Token",
-        "message": "Vault updated",
-        "handler": "GroupHandler",
-        "status": "SUCCESS"
-    }
+    ]
 }

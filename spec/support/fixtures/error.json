@@ -1,14 +1,26 @@
 {
-    "ERRORS": [
-        "Placeholder error for testing purposes."
-    ],
-    "DATA": {
-        "data": "Placeholder data for testing purposes."
-    },
-    "PARAMS": [],
     "CALLINFO": {
-        "token": "StoredSafe-Token",
-        "handler": "<Handler>",
-        "status": "FAIL"
-    }
+        "errorcodes": 1,
+        "errors": 1,
+        "general": [],
+        "handler": "Handler",
+        "status": "FAIL",
+        "token": "StoredSafe-Token"
+    },
+    "DATA": {
+        "token": "StoredSafe-Token"
+    },
+    "ERRORCODES": {
+        "2000": "Errormessages exists"
+    },
+    "ERRORS": [
+        "NO SUCH TEMPLATE"
+    ],
+    "HEADERS": {
+        "Accept": "*/*",
+        "Host": "safe.domain.cc",
+        "User-Agent": "curl/7.64.1",
+        "X-Http-Token": "StoredSafe-Token"
+    },
+    "PARAMS": []
 }

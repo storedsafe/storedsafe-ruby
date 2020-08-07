@@ -1,0 +1,44 @@
+{
+    "CALLINFO": {
+        "errorcodes": 0,
+        "errors": 0,
+        "general": [],
+        "handler": "UtilsHandler",
+        "status": "SUCCESS",
+        "policies": [
+            {
+                "id": 7,
+                "name": "High Quality Password (14+ chars, mixed case, number and special)",
+                "rules": {
+                    "min_length": 14,
+                    "min_lowercase_chars": 1,
+                    "min_nonalphanumeric_chars": 1,
+                    "min_numeric_chars": 1,
+                    "min_uppercase_chars": 1
+                }
+            },
+            {
+                "id": 8,
+                "name": "Good Quality Password (12+ chars, mixed case, number and special))",
+                "rules": {
+                    "min_length": 12,
+                    "min_lowercase_chars": 1,
+                    "min_nonalphanumeric_chars": 1,
+                    "min_numeric_chars": 1,
+                    "min_uppercase_chars": 1
+                }
+            }
+        ],
+        "token": "StoredSafe-Token"
+    },
+    "DATA": {
+        "token": "StoredSafe-Token"
+    },
+    "HEADERS": {
+        "Accept": "*/*",
+        "Host": "safe.domain.cc",
+        "User-Agent": "curl/7.64.1",
+        "X-Http-Token": "StoredSafe-Token"
+    },
+    "PARAMS": []
+}

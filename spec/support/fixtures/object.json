@@ -1,6 +1,30 @@
 {
-    "OBJECT": {
-        "489": {
+    "BREADCRUMB": [
+        {
+            "icon": "ico_server",
+            "objectid": "787",
+            "objectname": "aa"
+        }
+    ],
+    "CALLINFO": {
+        "errorcodes": 0,
+        "errors": 0,
+        "general": [],
+        "handler": "ObjectHandler",
+        "status": "SUCCESS",
+        "token": "StoredSafe-Token"
+    },
+    "DATA": {
+        "token": "StoredSafe-Token"
+    },
+    "HEADERS": {
+        "Accept": "*/*",
+        "Host": "safe.domain.cc",
+        "User-Agent": "curl/7.64.1",
+        "X-Http-Token": "StoredSafe-Token"
+    },
+    "OBJECT": [
+        {
             "id": "489",
             "parentid": "0",
             "templateid": "8",
@@ -8,7 +32,7 @@
             "status": "128",
             "objectname": "Disaster Recovery Instructions",
             "filename": "",
-            "children": "1",
+            "children": "0",
             "notes": false,
             "tags": "",
             "alarmed": false,
@@ -16,51 +40,33 @@
                 "name": "Disaster Recovery Instructions"
             }
         }
-    },
-    "TEMPLATESINFO": {
-        "8": {
-            "INFO": {
-                "id": "8",
-                "name": "Note",
-                "ico": "note",
+    ],
+    "PARAMS": [],
+    "TEMPLATES": [
+        {
+            "id": "8",
+            "info": {
                 "active": true,
                 "ed": true,
-                "wb": false,
-                "jp": true
+                "ico": "ico_note",
+                "id": "8",
+                "jp": true,
+                "name": "Note",
+                "wb": false
             },
-            "STRUCTURE": {
-                "name": {
-                    "translation": "Name",
-                    "type": "text",
+            "structure": [
+                {
+                    "alarm": false,
+                    "cc": false,
                     "encrypted": false,
-                    "show": true,
-                    "policy": false,
-                    "alarm": false,
+                    "nc": false,
                     "opt": false,
-                    "cc": false,
-                    "nc": false
-                },
-                "note": {
-                    "translation": "Note",
-                    "type": "textarea",
-                    "encrypted": true,
-                    "show": true,
                     "policy": false,
-                    "alarm": false,
-                    "opt": true,
-                    "cc": false,
-                    "nc": true
+                    "show": true,
+                    "translation": "Name",
+                    "type": "text"
                 }
-            }
+            ]
         }
-    },
-    "DATA": {
-        "token": "StoredSafe-Token"
-    },
-    "PARAMS": [],
-    "CALLINFO": {
-        "token": "StoredSafe-Token",
-        "handler": "ObjectHandler",
-        "status": "SUCCESS"
-    }
+    ]
 }

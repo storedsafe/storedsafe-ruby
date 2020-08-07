@@ -1,0 +1,40 @@
+{
+    "CALLINFO": {
+        "errorcodes": 0,
+        "errors": 0,
+        "general": [],
+        "handler": "UserHandler",
+        "status": "SUCCESS",
+        "token": "StoredSafe-Token",
+        "users": [
+                     {
+                "email": "mrfoo@manchu.com",
+                "fingerprint": "F09F01DDE2AFC972078D62B3F32057A33F58AF4E",
+                "fullname": "Foo Manchu",
+                "id": "149",
+                "otpprefix": "cccjgjgkhcbb",
+                "status": "140",
+                "username": "foomanchu"
+            },
+            {
+                "email": "pelle@foo.com",
+                "fingerprint": "AA57179E0FC5B2DC1AB78BADACBDBCC28799F7FE",
+                "fullname": "Pelle Test",
+                "id": "109",
+                "otpprefix": "cccbkleruukb",
+                "status": "460",
+                "username": "pelle"
+            }
+        ]
+    },
+    "DATA": {
+        "token": "StoredSafe-Token"
+    },
+    "HEADERS": {
+        "Accept": "*/*",
+        "Host": "safe.domain.cc",
+        "User-Agent": "curl/7.64.1",
+        "X-Http-Token": "StoredSafe-Token"
+    },
+    "PARAMS": []
+}

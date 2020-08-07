@@ -1,12 +1,13 @@
 {
-    "DATA": {
-        "token": "StoredSafe-Token"
-    },
-    "PARAMS": [],
-    "CALLINFO": {
-        "token": "StoredSafe-Token",
-        "message": "Vault deleted",
-        "handler": "GroupHandler",
-        "status": "SUCCESS"
-    }
+  "DATA": {
+    "token": "StoredSafe-Token"
+  },
+  "PARAMS": [
+  ],
+  "CALLINFO": {
+    "token": "StoredSafe-Token",
+    "message": "Vault deleted",
+    "handler": "GroupHandler",
+    "status": "SUCCESS"
+  }
 }

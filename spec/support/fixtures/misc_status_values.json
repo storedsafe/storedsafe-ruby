@@ -1,0 +1,37 @@
+{
+    "CALLINFO": {
+        "errorcodes": 0,
+        "errors": 0,
+        "general": [],
+        "handler": "UtilsHandler",
+        "status": "SUCCESS",
+        "statusbits": {
+            "userbits": {
+                "Active": 7,
+                "Admin": 2,
+                "Alarm": 4,
+                "Audit": 3,
+                "Changepass": 6,
+                "Escrow": 8,
+                "Read": 0,
+                "Write": 1
+            },
+            "vaultbits": {
+                "Admin": 2,
+                "Read": 0,
+                "Write": 1
+            }
+        },
+        "token": "StoredSafe-Token"
+    },
+    "DATA": {
+        "token": "StoredSafe-Token"
+    },
+    "HEADERS": {
+        "Accept": "*/*",
+        "Host": "safe.domain.cc",
+        "User-Agent": "curl/7.64.1",
+        "X-Http-Token": "StoredSafe-Token"
+    },
+    "PARAMS": []
+}

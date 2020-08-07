@@ -3,8 +3,9 @@
         "errorcodes": 0,
         "errors": 0,
         "general": [],
-        "handler": "AuthHandler",
+        "handler": "UtilsHandler",
         "status": "SUCCESS",
+        "version": "X.Y.Z-buildXXXX",
         "token": "StoredSafe-Token"
     },
     "DATA": {

@@ -3,15 +3,19 @@
         "errorcodes": 0,
         "errors": 0,
         "general": [],
-        "handler": "AuthHandler",
+        "handler": "VaultmembersHandler",
+        "message": "User added",
         "status": "SUCCESS",
         "token": "StoredSafe-Token"
     },
     "DATA": {
+        "status": 2,
         "token": "StoredSafe-Token"
     },
     "HEADERS": {
         "Accept": "*/*",
+        "Content-Length": "15",
+        "Content-Type": "application/x-www-form-urlencoded",
         "Host": "safe.domain.cc",
         "User-Agent": "curl/7.64.1",
         "X-Http-Token": "StoredSafe-Token"

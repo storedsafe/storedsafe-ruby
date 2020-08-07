@@ -1,118 +1,80 @@
 {
-    "OBJECT": {
-        "490": {
-            "id": "490",
-            "parentid": "0",
-            "templateid": "1",
-            "groupid": "179",
-            "status": "128",
-            "objectname": "firewall.za.example.com",
-            "filename": "",
-            "children": "0",
-            "notes": false,
-            "tags": "",
-            "alarmed": false,
-            "public": {
-                "host": "firewall.za.example.com",
-                "username": "root",
-                "info": "The pfSense fw protecting the ZA branch."
-            }
-        },
-        "492": {
-            "id": "492",
-            "parentid": "0",
-            "templateid": "1",
-            "groupid": "179",
-            "status": "128",
-            "objectname": "firewall2.za.example.com",
-            "filename": "",
-            "children": "0",
-            "notes": false,
-            "tags": "",
-            "alarmed": false,
-            "public": {
-                "host": "firewall2.za.example.com",
-                "username": "root",
-                "info": "The second pfSense fw protecting the ZA branch."
-            }
-        }
-    },
-    "TEMPLATESINFO": {
-        "1": {
-            "INFO": {
-                "id": "1",
-                "name": "Server",
-                "ico": "server",
-                "active": true,
-                "wb": true
-            },
-            "STRUCTURE": {
-                "host": {
-                    "translation": "Host / IP",
-                    "type": "text",
-                    "encrypted": false,
-                    "show": true,
-                    "policy": false,
-                    "alarm": false,
-                    "opt": false,
-                    "cc": false,
-                    "nc": false
-                },
-                "username": {
-                    "translation": "Username",
-                    "type": "text",
-                    "encrypted": false,
-                    "show": true,
-                    "policy": false,
-                    "alarm": false,
-                    "opt": false,
-                    "cc": false,
-                    "nc": false
-                },
-                "password": {
-                    "translation": "Password",
-                    "type": "text-passwdgen",
-                    "encrypted": true,
-                    "show": true,
-                    "policy": true,
-                    "alarm": true,
-                    "opt": false,
-                    "cc": true,
-                    "nc": true
-                },
-                "info": {
-                    "translation": "Information",
-                    "type": "textarea",
-                    "encrypted": false,
-                    "show": true,
-                    "policy": false,
-                    "alarm": false,
-                    "opt": true,
-                    "cc": false,
-                    "nc": false
-                },
-                "cryptedinfo": {
-                    "translation": "Sensitive info",
-                    "type": "textarea",
-                    "encrypted": true,
-                    "show": false,
-                    "policy": false,
-                    "alarm": false,
-                    "opt": true,
-                    "cc": false,
-                    "nc": false
-                }
-            }
-        }
+    "CALLINFO": {
+        "errorcodes": 0,
+        "errors": 0,
+        "general": [],
+        "handler": "FindHandler",
+        "status": "SUCCESS",
+        "token": "StoredSafe-Token"
     },
     "DATA": {
-        "token": "StoredSafe-Token",
-        "needle": "pfsense"
+        "needle": "pfsense",
+        "token": "StoredSafe-Token"
     },
+    "HEADERS": {
+        "Accept": "*/*",
+        "Host": "safe.domain.cc",
+        "User-Agent": "curl/7.64.1",
+        "X-Http-Token": "StoredSafe-Token"
+    },
+    "OBJECT": [
+        {
+            "alarmed": false,
+            "children": "0",
+            "filename": "",
+            "groupid": "121",
+            "id": "1368",
+            "notes": false,
+            "objectname": "firewall2.za.example.com",
+            "parentid": "0",
+            "public": {
+                "host": "firewall2.za.example.com",
+                "info": "The second pfSense fw protecting the ZA branch.",
+                "username": "root"
+            },
+            "status": "1152",
+            "tags": "",
+            "templateid": "1"
+        }
+    ],
     "PARAMS": [],
-    "CALLINFO": {
-        "token": "StoredSafe-Token",
-        "handler": "FindHandler",
-        "status": "SUCCESS"
-    }
+    "TEMPLATES": [
+        {
+            "id": "1",
+            "info": {
+                "active": true,
+                "ico": "ico_server",
+                "id": "1",
+                "name": "Server",
+                "wb": true
+            },
+            "structure": [
+                {
+                    "alarm": false,
+                    "cc": false,
+                    "encrypted": false,
+                    "fieldname": "host",
+                    "nc": false,
+                    "opt": false,
+                    "policy": false,
+                    "show": true,
+                    "translation": "Host",
+                    "type": "text"
+                },
+                {
+                    "alarm": false,
+                    "cc": false,
+                    "encrypted": false,
+                    "fieldname": "username",
+                    "log": true,
+                    "nc": false,
+                    "opt": false,
+                    "policy": false,
+                    "show": true,
+                    "translation": "Username",
+                    "type": "text"
+                }
+            ]
+        }
+    ]
 }

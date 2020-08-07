@@ -1,6 +1,17 @@
 {
-    "GROUP": {
-        "4": {
+    "CALLINFO": {
+        "errorcodes": 0,
+        "errors": 0,
+        "general": [],
+        "handler": "GroupHandler",
+        "status": "SUCCESS",
+        "token": "StoredSafe-Token"
+    },
+    "DATA": {
+        "token": "StoredSafe-Token"
+    },
+    "VAULT": [
+        {
             "id": "4",
             "groupname": "Vault number uno",
             "policy": "7",
@@ -8,9 +19,15 @@
             "status": "1",
             "statustext": "Read"
         }
+    ],
+    "HEADERS": {
+        "Accept": "*/*",
+        "Host": "safe.domain.cc",
+        "User-Agent": "curl/7.64.1",
+        "X-Http-Token": "StoredSafe-Token"
     },
-    "OBJECT": {
-        "6": {
+    "OBJECTS": [
+        {
             "id": "6",
             "parentid": "0",
             "templateid": "1",
@@ -27,83 +44,101 @@
                 "username": "Administrator",
                 "info": "Last changed from IP 1.2.3.4"
             }
-        }
-    },
-    "TEMPLATESINFO": {
-        "1": {
-            "INFO": {
-                "id": "1",
-                "name": "Server",
-                "ico": "server",
-                "active": true,
-                "wb": true
-            },
-            "STRUCTURE": {
-                "host": {
-                    "translation": "Host / IP",
-                    "type": "text",
-                    "encrypted": false,
-                    "show": true,
-                    "policy": false,
-                    "alarm": false,
-                    "opt": false,
-                    "cc": false,
-                    "nc": false
-                },
-                "username": {
-                    "translation": "Username",
-                    "type": "text",
-                    "encrypted": false,
-                    "show": true,
-                    "policy": false,
-                    "alarm": false,
-                    "opt": false,
-                    "cc": false,
-                    "nc": false
-                },
-                "password": {
-                    "translation": "Password",
-                    "type": "text-passwdgen",
-                    "encrypted": true,
-                    "show": true,
-                    "policy": true,
-                    "alarm": true,
-                    "opt": false,
-                    "cc": true,
-                    "nc": true
-                },
-                "info": {
-                    "translation": "Information",
-                    "type": "textarea",
-                    "encrypted": false,
-                    "show": true,
-                    "policy": false,
-                    "alarm": false,
-                    "opt": true,
-                    "cc": false,
-                    "nc": false
-                },
-                "cryptedinfo": {
-                    "translation": "Sensitive info",
-                    "type": "textarea",
-                    "encrypted": true,
-                    "show": false,
-                    "policy": false,
-                    "alarm": false,
-                    "opt": true,
-                    "cc": false,
-                    "nc": false
-                }
+        },
+        {
+            "id": "683",
+            "parentid": "0",
+            "templateid": "1001",
+            "groupid": "4",
+            "status": "1152",
+            "objectname": "Non alios suo modulo metire.",
+            "filename": "",
+            "children": "0",
+            "notes": false,
+            "tags": "",
+            "alarmed": false,
+            "public": {
+                "host": "Non alios suo modulo metire.",
+                "ip": "Non alios suo modulo metire.",
+                "username": "Non alios suo modulo metire.",
+                "info": "Non alios suo modulo metire."
             }
         }
-    },
-    "DATA": {
-        "token": "StoredSafe-Token"
-    },
+    ],
     "PARAMS": [],
-    "CALLINFO": {
-        "token": "StoredSafe-Token",
-        "handler": "GroupHandler",
-        "status": "SUCCESS"
-    }
+    "TEMPLATES": [
+        {
+            "id": "1",
+            "info": {
+                "active": true,
+                "ico": "ico_server",
+                "id": "1",
+                "name": "Server",
+                "wb": true
+            },
+            "structure": [
+                {
+                    "alarm": false,
+                    "cc": false,
+                    "encrypted": false,
+                    "fieldname": "host",
+                    "nc": false,
+                    "opt": false,
+                    "policy": false,
+                    "show": true,
+                    "translation": "Host",
+                    "type": "text"
+                },
+                {
+                    "alarm": false,
+                    "cc": false,
+                    "encrypted": false,
+                    "fieldname": "username",
+                    "log": true,
+                    "nc": false,
+                    "opt": false,
+                    "policy": false,
+                    "show": true,
+                    "translation": "Username",
+                    "type": "text"
+                }
+            ]
+        },
+        {
+            "id": "1001",
+            "info": {
+                "active": true,
+                "ico": "ico_server",
+                "id": "1001",
+                "name": "Server/IP",
+                "wb": true
+            },
+            "structure": [
+                {
+                    "alarm": false,
+                    "cc": false,
+                    "encrypted": false,
+                    "fieldname": "host",
+                    "nc": false,
+                    "opt": false,
+                    "policy": false,
+                    "show": true,
+                    "translation": "Host",
+                    "type": "text"
+                },
+                {
+                    "alarm": false,
+                    "cc": false,
+                    "encrypted": false,
+                    "fieldname": "ip",
+                    "nc": false,
+                    "opt": false,
+                    "policy": false,
+                    "show": true,
+                    "translation": "IP",
+                    "type": "text"
+                }
+            ]
+        }
+    ]
 }

@@ -1,20 +1,22 @@
 # StoredSafe API ruby wrapper
 
-This is a ruby wrapper for the StoredSafe REST-like API (See full [docs here](https://developer.storedsafe.com/)).
+Transparent Ruby wrapper for the StoredSafe REST-like API. (See full [docs here](https://developer.storedsafe.com/)).
+
+Full documentation of the API response signatures and more advanced paramters can be found at the [StoredSafe API Documentation](https://developer.storedsafe.com/).
 
 ## Install
 
 Install from rubygems `gem install storedsafe`
 
-Add to Gemfile `gem 'storedsafe', '~> 0.1.0'`
+Add to Gemfile `gem 'storedsafe', '~> 1.0.0'`
 
 Alternatively, if you whish to install the gem manually, you can clone this repo and build the gem yourself.
 
-```
+```bash
 git clone https://github.com/storedsafe/storedsafe-ruby
 cd storedsafe-ruby
 gem build storedsafe.gemspec
-gem install storedsafe-0.1.0.gem
+gem install storedsafe-1.0.0.gem
 ```
 
 ## Usage
@@ -27,8 +29,8 @@ api = StoredSafe.configure do |config|
 end
 
 # Auth
-api.login_totp('username', 'passphrase', 'otp')
-api.login_yubikey('username', 'passphrase', 'otp')
+api.login_totp(username, passphrase, otp)
+api.login_yubikey(username, passphrase, otp)
 api.logout()
 api.check()
 
@@ -36,13 +38,16 @@ api.check()
 api.list_vaults()
 api.vault_objects(vault_id)
 api.vault_members(vault_id)
+api.add_vault_member(vault_id, user_id, status)
+api.edit_vault_member(vault_id, user_id, status)
+api.remove_vault_member(vault_id, user_id)
 api.create_vault(**args) # See parameters in API documentation
 api.edit_vault(vault_id, **args)
 api.delete_vault(vault_id)
 
 # Objects
 api.get_object(object_id) # String or integer
-api.get_object(object_id, children=True) # children False by default
+api.get_object(object_id, include_children) # children False by default
 api.decrypt_object(object_id)
 api.create_object(**args)
 api.edit_object(object_id, **args)
@@ -64,6 +69,13 @@ api.generate_password() # Use vault policy
 api.generate_password(**args)
 ```
 
+## Examples
+
+### Generate password
+```ruby
+res = api.generate_password(type: 'diceword', words: 6, delimiter: '_')
+password = res['CALLINFO']['passphrase']
+```
 
 ## Configuration
 Configuration can be done in a few different ways. Other than the manual configuration, external configuration sources can be applied through the *config\_sources* array. This array contains Ruby Hashes with the fields that should be applied to the `StoredSafe::Config::Configurable` instance. By default fetch configurations through the `StoredSafe::Config::RcReader` and `StoredSafe::Config::EnvReader`.
@@ -94,6 +106,7 @@ def fetch_password(options, obj_id)
       StoredSafe::Config::RcReader.parse_file('/path/to/.storedsafe-client.rc'),
     ]
   end
-  api.object(obj_id, true)
+  res = api.decrypt_object(obj_id)
+  res['OBJECT'][0]['crypted']['password']
 end
 ```

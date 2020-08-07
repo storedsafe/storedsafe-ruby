@@ -1,25 +1,36 @@
 {
-    "GROUP": {
-        "179": {
-            "id": "179",
-            "groupname": "Firewalls in ZA",
-            "policy": "7",
+    "CALLINFO": {
+        "errorcodes": 0,
+        "errors": 0,
+        "general": [],
+        "handler": "VaultHandler",
+        "message": "Vault created",
+        "status": "SUCCESS",
+        "token": "StoredSafe-Token"
+    },
+    "DATA": {
+        "description": "Login information and license keys",
+        "groupname": "Firewalls in ZA",
+        "policy": "7",
+        "token": "StoredSafe-Token"
+    },
+    "HEADERS": {
+        "Accept": "*/*",
+        "Content-Length": "97",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Host": "safe.domain.cc",
+        "User-Agent": "curl/7.64.1",
+        "X-Http-Token": "StoredSafe-Token"
+    },
+    "PARAMS": [],
+    "VAULT": [
+        {
             "description": "Login information and license keys",
+            "groupname": "Firewalls in ZA",
+            "id": "144",
+            "policy": "7",
             "status": "4",
             "statustext": "Admin"
         }
-    },
-    "DATA": {
-        "token": "StoredSafe-Token",
-        "groupname": "Firewalls in ZA",
-        "policy": "7",
-        "description": "Login information and license keys"
-    },
-    "PARAMS": [],
-    "CALLINFO": {
-        "token": "StoredSafe-Token",
-        "message": "Vault created",
-        "handler": "GroupHandler",
-        "status": "SUCCESS"
-    }
+    ]
 }

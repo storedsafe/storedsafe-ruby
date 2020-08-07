@@ -1,17 +1,25 @@
 {
     "CALLINFO": {
+        "calculated_status": 140,
         "errorcodes": 0,
         "errors": 0,
         "general": [],
-        "handler": "AuthHandler",
+        "handler": "UserHandler",
         "status": "SUCCESS",
-        "token": "StoredSafe-Token"
+        "token": "StoredSafe-Token",
+        "user_created": "Foo Manchu"
     },
     "DATA": {
+        "email": "mrfoo@manchu.com",
+        "status": [
+            2, 3, 7
+        ],
         "token": "StoredSafe-Token"
     },
     "HEADERS": {
         "Accept": "*/*",
+        "Content-Length": "169",
+        "Content-Type": "application/json",
         "Host": "safe.domain.cc",
         "User-Agent": "curl/7.64.1",
         "X-Http-Token": "StoredSafe-Token"

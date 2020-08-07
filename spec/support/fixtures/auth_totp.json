@@ -6,6 +6,7 @@
         },
         "errorcodes": 0,
         "errors": 0,
+
         "token": "StoredSafe-Token",
         "fingerprint": "<PGP fingerprint>",
         "userid": "42",
@@ -24,10 +25,10 @@
     },
     "DATA": {
         "username": "foo@example.com",
-        "passphrase": "ThisIsAPrettyLousyPassPhrase",
-        "otp": "123456",
-        "apikey": "My-API-Key",
-        "logintype": "totp"
+        "passphrase":"ThisIsAPrettyLousyPassPhrase",
+        "otp":"123456",
+        "apikey":"My-API-Key",
+        "logintype":"totp"
     },
     "HEADERS": {
         "Accept": "*/*",
