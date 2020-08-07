@@ -1,0 +1,38 @@
+{
+    "CALLINFO": {
+        "errorcodes": 0,
+        "errors": 0,
+        "general": [],
+        "handler": "VaultmembersHandler",
+        "status": "SUCCESS",
+        "token": "rotated_storedsafe_token",
+        "vaultmembers": [
+            {
+                "email": "sven@moo.se",
+                "fullname": "Sven Test",
+                "groupstatus": "4",
+                "id": "10",
+                "status": "2444",
+                "username": "sven"
+            },
+            {
+                "email": "alfred@test.se",
+                "fullname": "Aldred Abrahamssom",
+                "groupstatus": "4",
+                "id": "29",
+                "status": "140",
+                "username": "alfred"
+            }
+        ]
+    },
+    "DATA": {
+        "token": "your_storedsafe_token"
+    },
+    "HEADERS": {
+        "Accept": "*/*",
+        "Host": "safe.domain.cc",
+        "User-Agent": "curl/7.64.1",
+        "X-Http-Token": "your_storedsafe_token"
+    },
+    "PARAMS": []
+}

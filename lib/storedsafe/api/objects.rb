@@ -8,9 +8,9 @@ module StoredSafe
     # Lists all information regarding an object and optionally lists children
     # of the object.
     # @param [Integer] object_id
-    # @param [Boolean] children=false List object children
-    def get_object(object_id, children = false)
-      request_get("/object/#{object_id}", children: children)
+    # @param [Boolean] include_children=false List object children
+    def get_object(object_id, include_children = false)
+      request_get("/object/#{object_id}", children: include_children)
     end
 
     ##
@@ -24,16 +24,16 @@ module StoredSafe
     ##
     # Creates a new object in an existing vault.
     # @param [Hash] args (See API documentation)
-    def create_object(args)
-      request_post('/object', args)
+    def create_object(**args)
+      request_post('/object', **args)
     end
 
     ##
     # Edits an existing object.
     # @param [Integer] object_id Object to edit.
     # @param [Hash] args (See API documentation)
-    def edit_object(object_id, args)
-      request_put("/object/#{object_id}", args)
+    def edit_object(object_id, **args)
+      request_put("/object/#{object_id}", **args)
     end
 
     ##

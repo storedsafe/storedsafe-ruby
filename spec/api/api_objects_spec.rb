@@ -1,64 +1,52 @@
 require 'storedsafe'
 
-describe Storedsafe::API, :type => :api do
+describe StoredSafe::API, :type => :api do
   let(:api) do
-    Storedsafe::API.new do |config|
-      config.server = STOREDSAFE_SERVER
+    StoredSafe::API.new do |config|
+      config.host = STOREDSAFE_SERVER
       config.token = MockServer::TOKEN
-      config.parser = Storedsafe::Parser::RawParser
+      config.parser = StoredSafe::Parser::RawParser
       config.config_sources = []
     end
   end
 
-  describe '.object' do
-    context 'with options default values (decrypt and children false)' do
+  describe '.get_object' do
+    context 'with options default values (children false)' do
       it 'returns success response without decrypted information or children' do
         object_id = 1
 
-        res = api.object(object_id)
+        res = api.get_object(object_id)
         expect(res).to eq(response_from_file('object.json'))
       end
     end
 
-    context 'with decrypt: true' do
-      it 'returns success response with decrypted data' do
-        object_id = 1
-        decrypt = true
-
-        res = api.object(object_id, decrypt: decrypt)
-        expect(res).to eq(response_from_file('object_decrypt.json'))
-      end
-    end
-
-    context 'with children: true' do
+    context 'with children = true' do
       it 'returns success response with children' do
         object_id = 1
         children = true
 
-        res = api.object(object_id, children: children)
+        res = api.get_object(object_id, children)
         expect(res).to eq(response_from_file('object_children.json'))
       end
     end
+  end
 
-    context 'with decrypt: true and children: true' do
-      it 'returns error response for decrypting multiple objects at once' do
-        object_id = 1
-        decrypt = true
-        children = true
+  describe '.decrypt_object' do
+    it 'returns success response with decrypted data' do
+      object_id = 1
 
-        res = api.object(object_id, decrypt: decrypt, children: children)
-        expect(res).to eq(response_from_file('error.json'))
-      end
+      res = api.decrypt_object(object_id)
+      expect(res).to eq(response_from_file('object_decrypt.json'))
     end
   end
 
   describe '.create_object' do
     it 'returns success response' do
-      template_id = 1
-      group_id = 1
-      parent_id = 1
-      object_name = "name"
-      template_args = {
+      args = {
+        templateid: 1,
+        groupid: 1,
+        parentid: 1,
+        objectname: "name",
         host: "host",
         username: "username",
         info: "info",
@@ -66,13 +54,7 @@ describe Storedsafe::API, :type => :api do
         cryptedinfo: "cryptedinfo"
       }
 
-      res = api.create_object(
-        template_id,
-        group_id,
-        parent_id,
-        object_name,
-        template_args
-      )
+      res = api.create_object(**args)
       expect(res).to eq(response_from_file('object_create.json'))
     end
   end
@@ -80,11 +62,11 @@ describe Storedsafe::API, :type => :api do
   describe '.edit_object' do
     it 'returns success response' do
       object_id = 1
-      template_id = 1
-      group_id = 1
-      parent_id = 1
-      object_name = "name"
-      template_args = {
+      args = {
+        templateid: 1,
+        groupid: 1,
+        parentid: 1,
+        objectname: "name",
         host: "host",
         username: "username",
         info: "info",
@@ -92,14 +74,7 @@ describe Storedsafe::API, :type => :api do
         cryptedinfo: "cryptedinfo"
       }
 
-      res = api.edit_object(
-        object_id,
-        template_id,
-        group_id,
-        parent_id,
-        object_name,
-        template_args
-      )
+      res = api.edit_object(object_id, **args)
       expect(res).to eq(response_from_file('object_edit.json'))
     end
   end

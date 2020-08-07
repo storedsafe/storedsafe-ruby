@@ -33,8 +33,8 @@ module StoredSafe
     # @param [Integer] policy Password policy.
     # @param [String] description
     # @param [Hash] args (See API documentation)
-    def create_vault(args)
-      request_post('/vault', args)
+    def create_vault(**args)
+      request_post('/vault', **args)
     end
 
     ##
@@ -42,8 +42,8 @@ module StoredSafe
     # parameters passed in the last argument Hash.
     # @param [Integer] vault_id
     # @param [Hash] args (See API documentation)
-    def edit_vault(vault_id, args)
-      request_put("/vault/#{vault_id}", args)
+    def edit_vault(vault_id, **args)
+      request_put("/vault/#{vault_id}", **args)
     end
 
     ##

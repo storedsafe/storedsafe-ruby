@@ -1,6 +1,6 @@
 require 'storedsafe'
 
-describe Storedsafe::Config::EnvReader do
+describe StoredSafe::Config::EnvReader do
   context 'with no parameters given' do
     it 'reads settings from env with default keys' do
       token = 'A1B2C3'
@@ -17,10 +17,10 @@ describe Storedsafe::Config::EnvReader do
       allow(ENV).to receive(:[]).with('STOREDSAFE_SKIP_VERIFY')
         .and_return(skip_verify)
 
-      config = Storedsafe::Config::EnvReader.parse_env
+      config = StoredSafe::Config::EnvReader.parse_env
 
       expect(config[:token]).to eq(token)
-      expect(config[:server]).to eq(server)
+      expect(config[:host]).to eq(server)
       expect(config[:ca_bundle]).to eq(ca_bundle)
       expect(config[:skip_verify]).to eq(skip_verify)
     end
@@ -42,15 +42,15 @@ describe Storedsafe::Config::EnvReader do
       allow(ENV).to receive(:[]).with('FAKE_SKIP_VERIFY')
         .and_return(skip_verify)
 
-      config = Storedsafe::Config::EnvReader.parse_env({
+      config = StoredSafe::Config::EnvReader.parse_env({
         token: 'FAKE_TOKEN',
-        server: 'FAKE_SERVER',
+        host: 'FAKE_SERVER',
         ca_bundle: 'FAKE_CABUNDLE',
         skip_verify: 'FAKE_SKIP_VERIFY'
       })
 
       expect(config[:token]).to eq(token)
-      expect(config[:server]).to eq(server)
+      expect(config[:host]).to eq(server)
       expect(config[:ca_bundle]).to eq(ca_bundle)
       expect(config[:skip_verify]).to eq(skip_verify)
     end

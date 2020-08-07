@@ -1,0 +1,98 @@
+{
+    "CALLINFO": {
+        "errorcodes": 0,
+        "errors": 0,
+        "general": [],
+        "handler": "TemplateHandler",
+        "status": "SUCCESS",
+        "token": "StoredSafe-Token"
+    },
+    "DATA": {
+        "token": "StoredSafe-Token"
+    },
+    "HEADERS": {
+        "Accept": "*/*",
+        "Host": "safe.domain.cc",
+        "User-Agent": "curl/7.64.1",
+        "X-Http-Token": "StoredSafe-Token"
+    },
+    "PARAMS": [],
+    "TEMPLATE": {
+        "INFO": {
+            "active": true,
+            "ico": "ico_server",
+            "id": "1001",
+            "name": "Server/IP",
+            "wb": true
+        },
+        "STRUCTURE": {
+            "cryptedinfo": {
+                "alarm": false,
+                "cc": false,
+                "encrypted": true,
+                "nc": false,
+                "opt": true,
+                "policy": false,
+                "show": false,
+                "translation": "Sensitive info",
+                "type": "textarea"
+            },
+            "host": {
+                "alarm": false,
+                "cc": false,
+                "encrypted": false,
+                "nc": false,
+                "opt": false,
+                "policy": false,
+                "show": true,
+                "translation": "Host",
+                "type": "text"
+            },
+            "info": {
+                "alarm": false,
+                "cc": false,
+                "encrypted": false,
+                "nc": false,
+                "opt": true,
+                "policy": false,
+                "show": true,
+                "translation": "Information",
+                "type": "textarea"
+            },
+            "ip": {
+                "alarm": false,
+                "cc": false,
+                "encrypted": false,
+                "nc": false,
+                "opt": false,
+                "policy": false,
+                "show": true,
+                "translation": "IP",
+                "type": "text"
+            },
+            "password": {
+                "alarm": true,
+                "cc": true,
+                "encrypted": true,
+                "nc": true,
+                "opt": false,
+                "policy": true,
+                "show": true,
+                "translation": "Password",
+                "type": "text-passwdgen"
+            },
+            "username": {
+                "alarm": false,
+                "cc": false,
+                "encrypted": false,
+                "log": true,
+                "nc": false,
+                "opt": false,
+                "policy": false,
+                "show": true,
+                "translation": "Username",
+                "type": "text"
+            }
+        }
+    }
+}

@@ -4,6 +4,9 @@
     },
     "PARAMS": [],
     "CALLINFO": {
+        "errorcodes": 0,
+        "errors": 0,
+        "general": [],
         "token": "StoredSafe-Token",
         "": "SESSION_ALIVE",
         "handler": "AuthHandler",

@@ -1,22 +1,35 @@
 {
-    "DATA": {
-        "token": "StoredSafe-Token",
-        "templateid": "1",
-        "parentid": "0",
-        "groupid": "179",
-        "objectname": "firewall2.za.example.com",
-        "host": "firewall2.za.example.com",
-        "username": "root",
-        "info": "The second pfSense fw protecting the ZA branch.",
-        "password": "~[vN8x9W6~7P367vm53Y",
-        "cryptedinfo": "iLO password is #q:vP74A+VRmW5Ueu12O"
-    },
-    "PARAMS": [],
     "CALLINFO": {
-        "token": "StoredSafe-Token",
-        "objectid": 491,
-        "message": "Object successfully saved",
+        "errorcodes": 0,
+        "errors": 0,
+        "general": [
+            "BAD_POLICY"
+        ],
         "handler": "ObjectHandler",
-        "status": "SUCCESS"
-    }
+        "message": "Object successfully saved",
+        "objectid": 1368,
+        "status": "SUCCESS",
+        "token": "StoredSafe-Token"
+    },
+    "DATA": {
+        "cryptedinfo": "iLO password is #q:vP74A+VRmW5Ueu12O",
+        "groupid": "179",
+        "host": "firewall2.za.example.com",
+        "info": "The second pfSense fw protecting the ZA branch.",
+        "objectname": "firewall2.za.example.com",
+        "parentid": "0",
+        "password": "~[vN8x9W6~7P367vm53Y",
+        "templateid": "1",
+        "token": "StoredSafe-Token",
+        "username": "root"
+    },
+    "HEADERS": {
+        "Accept": "*/*",
+        "Content-Length": "304",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Host": "safe.domain.cc",
+        "User-Agent": "curl/7.64.1",
+        "X-Http-Token": "StoredSafe-Token"
+    },
+    "PARAMS": []
 }

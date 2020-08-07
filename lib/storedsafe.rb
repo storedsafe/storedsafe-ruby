@@ -7,7 +7,7 @@ require 'storedsafe/parser'
 ##
 # Ruby wrapper for the StoredSafe RESTlike API.
 module StoredSafe
-  VERSION = '0.1.0'
+  VERSION = '1.0.0'
 
   class << self
     ##

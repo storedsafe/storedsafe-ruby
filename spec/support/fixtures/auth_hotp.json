@@ -1,11 +1,11 @@
 {
-    "DATA": {
-        "username": "foo@example.com",
-        "keys": "ThisIsAPrettyLousyPassPhraseMy-API-Key123456"
-    },
-    "PARAMS": [],
     "CALLINFO": {
-        "token": "StoredSafe-Token",
+        "audit": {
+            "violations": [],
+            "warnings": []
+        },
+        "errorcodes": 0,
+        "errors": 0,
         "fingerprint": "<PGP fingerprint>",
         "userid": "42",
         "password": "ThisIsAPrettyLousyPassPhrase",
@@ -14,7 +14,25 @@
         "fullname": "Sven Test",
         "timeout": 3600000,
         "filesupport": 3,
+        "general": [
+            "Your passphrase is weak and should be changed"
+        ],
         "handler": "AuthHandler",
-        "status": "SUCCESS"
-    }
+        "status": "SUCCESS",
+        "token": "StoredSafe-Token",
+        "version": "2.1.0"
+    },
+    "DATA": {
+        "apikey": "abcde12345",
+        "username": "foo@example.com",
+        "keys": "ThisIsAPrettyLousyPassPhraseMy-API-KeyOhMyCouldThisReallyBeAnOTP"
+    },
+    "HEADERS": {
+        "Accept": "*/*",
+        "Content-Length": "107",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Host": "safe.domain.cc",
+        "User-Agent": "curl/7.64.1"
+    },
+    "PARAMS": []
 }

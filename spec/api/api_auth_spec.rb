@@ -1,31 +1,30 @@
 require 'storedsafe'
 
-describe Storedsafe::API, :type => :api  do
+describe StoredSafe::API, :type => :api  do
   let!(:api) do
-    Storedsafe::API.new do |config|
-      config.server = STOREDSAFE_SERVER
-      config.parser = Storedsafe::Parser::RawParser
-      config.username = MockServer::USERNAME
-      config.api_key = MockServer::APIKEY
+    StoredSafe::API.new do |config|
+      config.host = STOREDSAFE_SERVER
+      config.parser = StoredSafe::Parser::RawParser
+      config.apikey = MockServer::APIKEY
       config.config_sources = []
     end
   end
 
-  describe '.authenticate_yubikey' do
+  describe '.login_yubikey' do
     it 'successfully receives a token' do
       api.token = nil
 
-      res = api.authenticate_yubikey(MockServer::PASSPHRASE, MockServer::OTP)
+      res = api.login_yubikey(MockServer::USERNAME, MockServer::PASSPHRASE, MockServer::OTP)
       expect(api.token).to eq(MockServer::TOKEN)
       expect(res).to eq(response_from_file('auth_hotp.json'))
     end
   end
 
-  describe '.authenticate' do
+  describe '.login_totp' do
     it 'successfully receives a token' do
       api.token = nil
 
-      res = api.authenticate(MockServer::PASSPHRASE, MockServer::OTP)
+      res = api.login_totp(MockServer::USERNAME, MockServer::PASSPHRASE, MockServer::OTP)
       expect(api.token).to eq(MockServer::TOKEN)
       expect(res).to eq(response_from_file('auth_totp.json'))
     end

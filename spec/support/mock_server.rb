@@ -70,6 +70,7 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
   end
 
   def auth_totp(data)
+    puts("DEBUG: #{data}")
     if data['username'] == USERNAME &&
        data['passphrase'] == PASSPHRASE &&
        data['otp'] == OTP &&
@@ -84,7 +85,7 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
 
   # Logout
   get '/api/1.0/auth/logout' do
-    if token_valid?(params)
+    if token_valid?(request)
       status 200
       response_from_file('auth_logout.json')
     else
@@ -95,7 +96,7 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
 
   # Check
   get '/api/1.0/auth/check' do
-    if token_valid?(params)
+    if token_valid?(request)
       status 200
       response_from_file('auth_check.json')
     else
@@ -106,7 +107,7 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
 
   # Vaults
   get '/api/1.0/vault' do
-    if token_valid?(params)
+    if token_valid?(request)
       status 200
       response_from_file('vault.json')
     else
@@ -117,9 +118,20 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
 
   # List objects in vault
   get '/api/1.0/vault/:vault_id' do
-    if token_valid?(params)
+    if token_valid?(request)
       status 200
       response_from_file('vault_objects.json')
+    else
+      status 403
+      error_response
+    end
+  end
+
+  # List members in vault
+  get '/api/1.0/vault/:vault_id/members' do
+    if token_valid?(request)
+      status 200
+      response_from_file('vault_members.json')
     else
       status 403
       error_response
@@ -129,7 +141,7 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
   # Create vault
   post '/api/1.0/vault' do
     data = parse_body
-    if token_valid?(data) &&
+    if token_valid?(request) &&
        data['groupname'] &&
        data['policy'] &&
        data['description']
@@ -144,7 +156,7 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
   # Edit vault
   put '/api/1.0/vault/:vault_id' do
     data = parse_body
-    if token_valid?(data) &&
+    if token_valid?(request) &&
        data['groupname'] &&
        data['policy'] &&
        data['description']
@@ -159,7 +171,7 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
   # Delete vault
   delete '/api/1.0/vault/:vault_id' do
     data = parse_body
-    if token_valid?(data)
+    if token_valid?(request)
       status 200
       response_from_file('vault_delete.json')
     else
@@ -170,7 +182,7 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
 
   # List objects
   get '/api/1.0/object/:object_id' do
-    if token_valid?(params)
+    if token_valid?(request)
       status 200
       if params['decrypt'] == 'true' and params['children'] == 'true'
         error_response
@@ -190,7 +202,7 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
   # Create object
   post '/api/1.0/object' do
     data = parse_body
-    if token_valid?(data) &&
+    if token_valid?(request) &&
        data['templateid'] &&
        data['groupid'] &&
        data['parentid'] &&
@@ -211,7 +223,7 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
   # Edit object
   put '/api/1.0/object/:object_id' do
     data = parse_body
-    if token_valid?(data) &&
+    if token_valid?(request) &&
        data['templateid'] &&
        data['groupid'] &&
        data['parentid'] &&
@@ -231,7 +243,7 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
 
   delete '/api/1.0/object/:object_id' do
     data = parse_body
-    if token_valid?(data)
+    if token_valid?(request)
       status 200
       response_from_file('object_delete.json')
     else
@@ -242,7 +254,7 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
 
   # Search objects
   get '/api/1.0/find' do
-    if token_valid?(params) && params['needle']
+    if token_valid?(request) && params['needle']
       status 200
       response_from_file('find.json')
     else
@@ -253,7 +265,7 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
 
   # List templates
   get '/api/1.0/template' do
-    if token_valid?(params)
+    if token_valid?(request)
       status 200
       response_from_file('template.json')
     else
@@ -262,11 +274,11 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
     end
   end
 
-  # Retrieve template
+  # Get template
   get '/api/1.0/template/:template_id' do
-    if token_valid?(params)
+    if token_valid?(request)
       status 200
-      response_from_file('template_retrieve.json')
+      response_from_file('template_get.json')
     else
       status 403
       error_response
@@ -275,8 +287,8 @@ class MockServer < Sinatra::Base # rubocop:disable Metrics/ClassLength
 
   helpers do
     # Verify that token exists and that it is valid.
-    def token_valid?(params)
-      token = params['token']
+    def token_valid?(request)
+      token = request.env['HTTP_X_HTTP_TOKEN']
       return token == TOKEN if token
       false
     end
