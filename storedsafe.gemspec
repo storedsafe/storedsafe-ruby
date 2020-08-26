@@ -7,14 +7,11 @@ Gem::Specification.new do |spec|
   spec.version       = StoredSafe::VERSION
 
   spec.authors       = ['Oscar Mattsson']
-  spec.email         = ['oscar_mattsson@live.se']
+  spec.email         = ['oscar@storedsafe.com']
 
   spec.summary       = "The Storedsafe gem is a ruby interface for the"\
                        " Storedsafe REST-like API."
   spec.homepage      = 'https://github.com/storedsafe/storedsafe-ruby'
-
-  spec.author        = 'Oscar Mattsson'
-  spec.email         = 'oscar_mattsson@live.se'
   spec.license       = 'Apache-2.0'
 
   spec.files         = spec.files = Dir.glob('lib/**/*') + %w(LICENSE README.md)
